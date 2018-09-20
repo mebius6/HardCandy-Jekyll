@@ -809,7 +809,7 @@ export default class UselessTextInput extends Component {
 <Image source={{uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg'}} style={{width:150 ,height:150}}/>
 ```
 - ##### 网络图片的请求参数
-```
+```js
 //可以在Image组件的source属性中指定一些请求参数
 <Image source={{
   uri: 'https://facebook.github.io/react/img/logo_og.png',
