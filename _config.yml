@@ -40,7 +40,7 @@ SNS-icon: #['facebook', 'weibo', 'QQ', 'github', 'Dribbble', 'twitter', 'instagr
   twitch: ''
 
 # 分页
-paginate: 2
+paginate: 10
 paginatepath: ['page:num']
 
 # since
@@ -54,7 +54,7 @@ kramdown:
 # 代码高亮 使用rouge
 highlighter: rouge
 # 代码高亮主题使用pygments主题: autumn\ default\ emacs\ friendly\ manni\ murphy\ pastie\ perldoc\ tango 任选一个你喜欢的主题名称填在下面的单引号中
-pygmentsTheme: 'default'
+pygmentsTheme: 'friendly'
 
 # 友情链接
 friends:
@@ -69,8 +69,8 @@ livere: true
 livere_uid: 'MTAyMC8zNDI2OS8xMDgwNg==' # MTAyMC8zNDI2OS8xMDgwNg==
 # Gitment评论 OAuth Application
 Gitment: false
-Gitment_owner: ''  # github用户名
-Gitment_repo: ''  # github博客存放的仓库名
+Gitment_owner: 'mebius6'  # github用户名
+Gitment_repo: 'mebius6.github.io'  # github博客存放的仓库名
 client_id: ''  # 注册 OAuth Application 后获得的 client_id
 client_secret: ''  # 注册 OAuth Application 后获得的 client_secret
 
