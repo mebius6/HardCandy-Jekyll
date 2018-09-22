@@ -1,19 +1,40 @@
 <header id="index-header">
-  <div class="top-center">
-      <div class="logo">
-          <a href="{{ "/" | relative_url }}" title="my awesome webtitle">{{ site.webtitle }}</a>
-      </div>
-      <nav class="top-nav">
-          <ul>
-              {% for i in site.nav %}
+    <div class="top-center">
+        <div class="logo">
+            <a href="{{ "/" | relative_url }}" title="my awesome webtitle">{{ site.webtitle }}</a>
+        </div>
+        <nav class="top-nav">
+            <ul>
+                {% for i in site.nav %}
                 <li><a href="{{ i[1] }}">{{ i[0] }}</a></li>
-              {% endfor %}
-          </ul>
-      </nav>
-      <div id="top-boot">
-        <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img src="/assets/boot.png" alt=""></a>
-        <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img src="/assets/boot.png" alt=""></a>
-      </div>
-  </div>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div id="top-boot">
+            <a href="javascript:;" id="boot1" style="display:block;" onclick="document.getElementById('boot-area').style.display='block';document.getElementById('boot1').style.display='none';document.getElementById('boot2').style.display='block';"><img
+                    src="/assets/boot.png" alt=""></a>
+            <a href="javascript:;" id="boot2" style="display: none;" onclick="document.getElementById('boot-area').style.display='none';document.getElementById('boot1').style.display='block';document.getElementById('boot2').style.display='none';"><img
+                    src="/assets/boot.png" alt=""></a>
+        </div>
+    </div>
 
 </header>
+<style>
+    table {
+        border-left: 1px solid #000000;
+        border-top: 1px solid #000000;
+        width: 100%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    table th,
+    td {
+        border-right: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+    }
+</style>
