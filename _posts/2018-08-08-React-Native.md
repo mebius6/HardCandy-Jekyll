@@ -1398,35 +1398,36 @@ render() {
 - #### 如果要渲染的是一组需要分组的数据，也许还带有分组标签的，那么SectionList将是个不错的选择.
 - #### SectionList常用属性和方法
   - ##### 属性集合
-|属性名|类型|说明
-|---|---|---
-|sections|Array|数据源
-|ItemSeparatorComponent|ReactClass<any>|不会出现在第一行之前和最后一行之后
-|SectionSeparatorComponent|ReactClass<any>|每个section之间的分隔组件
-|ListEmptyComponent|	ReactClass<any>/React.Element<any>|列表为空时渲染该组件。可以是React Component, 也可以是一个render函数， 或者渲染好的element。
-|ListFooterComponent|ReactClass<any>|尾部组件
-|ListHeaderComponent|ReactClass<any>|头部组件
-|data|Array<ItemT>|为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的VirtualizedList组件
-|extraData|any|如果有除data以外的数据用在列表中（不论是用在renderItem还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。
-|getItem|any|获取控件的绑定数据
-|getItemCount|any|获取绑定数据的条数
-|getItemLayout|(data: ?Array<ItemT>, index: number) => {length: number, offset: number, index: number}|getItemLayout是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，getItemLayout用起来就既高效又简单，类似下面这样：getItemLayout={(data, index) => ( {length: 行高, offset: 行高 * index, index} )}；注意如果你指定了SeparatorComponent，请把分隔线的尺寸也考虑到offset的计算之中。
-|initialNumToRender|number|指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。
-|keyExtractor|(item: ItemT, index: number) => string|此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。
-|legacyImplementation|boolean|设置为true则使用旧的ListView的实现
-onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用
-|onEndReachedThreshold|number|决定当距离内容最底部还有多远时触发onEndReached回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发
-|onRefresh|void|如果设置了此选项，则会在列表头部添加一个标准的RefreshControl控件，以便实现“下拉刷新”的功能。同时你需要正确设置refreshing属性
-|onViewableItemsChanged|(info: {viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void|在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置viewabilityconfig属性
-|refreshing|boolean|在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号
-|renderItem|(info: {item: ItemT, index: number}) => ?React.Element<any>|根据行数据data渲染每一行的组件
-|viewabilityConfig|ViewabilityConfig|请参考[ViewabilityHelper](https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js)的源码来了解具体的配置
+
+| 属性名 | 类型 | 说明
+| --- |--- |--- |
+| sections | Array | 数据源  |
+| ItemSeparatorComponent |ReactClass<any> |不会出现在第一行之前和最后一行之后  |
+| SectionSeparatorComponent  | ReactClass<any>  | 每个section之间的分隔组件  |
+| ListEmptyComponent | ReactClass<any>/React.Element<any> | 列表为空时渲染该组件。可以是React Component, 也可以是一个render函数， 或者渲染好的element。  |
+| ListFooterComponent | ReactClass<any> | 尾部组件 |
+| ListHeaderComponent | ReactClass<any> |头部组件 |
+| data | Array<ItemT> | 为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的VirtualizedList组件 |
+| extraData | any | 如果有除data以外的数据用在列表中（不论是用在renderItem还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。 |
+| getItem | any | 获取控件的绑定数据 |
+| getItemCount | any | 获取绑定数据的条数 |
+| getItemLayout | (data: ?Array<ItemT>, index: number) => {length: number, offset: number, index: number} | getItemLayout是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，getItemLayout用起来就既高效又简单，类似下面这样：getItemLayout={(data, index) => ( {length: 行高, offset: 行高 * index, index} )}；注意如果你指定了SeparatorComponent，请把分隔线的尺寸也考虑到offset的计算之中。 |
+| initialNumToRender | number | 指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。 |
+| keyExtractor | (item: ItemT, index: number) => string|此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。 |
+| legacyImplementation | boolean | 设置为true则使用旧的ListView的实现
+onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用  |
+| onEndReachedThreshold | number | 决定当距离内容最底部还有多远时触发onEndReached回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发 |
+| onRefresh | void | 如果设置了此选项，则会在列表头部添加一个标准的RefreshControl控件，以便实现“下拉刷新”的功能。同时你需要正确设置refreshing属性 |
+| onViewableItemsChanged | (info: {viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void | 在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置viewabilityconfig属性 |
+| refreshing | boolean | 在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号 |
+| renderItem | (info: {item: ItemT, index: number}) => ?React.Element<any> | 根据行数据data渲染每一行的组件 |
+| viewabilityConfig | ViewabilityConfig | 请参考[ViewabilityHelper](https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js)的源码来了解具体的配置 |
   - ##### 方法集合
- 方法名|说明
- |---|---
-|scrollToLocation|将可视区内位于特定sectionIndex 或 itemIndex(section内)位置的列表项，滚动到可视区的制定位置。比如说，viewPosition 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。viewOffset是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间。注意: 如果没有设置getItemLayout，就不能滚动到位于外部渲染区的位置。
-|recordInteraction|主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当waitForInteractions 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。
-|flashScrollIndicators|短暂地显示滚动指示器。
+| 方法名|说明
+| --- | --- |
+| scrollToLocation | 将可视区内位于特定sectionIndex 或 itemIndex(section内)位置的列表项，滚动到可视区的制定位置。比如说，viewPosition 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。viewOffset是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间。注意: 如果没有设置getItemLayout，就不能滚动到位于外部渲染区的位置。 |
+| recordInteraction | 主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当waitForInteractions 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。 |
+| flashScrollIndicators | 短暂地显示滚动指示器。 |
 
 - ##### SectionList示例，通讯录实现以及源码
  
@@ -1530,10 +1531,11 @@ class MainScreen extends React.Component {
   - 如果你只针对iOS平台开发，那么可以考虑使用NavigatorIOS。它是基于 UINavigationController封装的，所以看起来很像。
   - NavigatorIOS使用路由要渲染的组件在路由对象的component字段中指定，要给目标组件传递的参数则写在passProps中。被渲染的component都会自动接受到一个名为navigator的属性，你可以直接调用此对象(this.props.navigator)的push和pop方法。
   - 由于NavigatorIOS使用的是原生的UIKit导航，所以它会自动渲染一个带有返回按钮和标题的导航栏。
-  ```JS
+
+```jsx
     import React, { Component, PropTypes } from 'react';
     import { NavigatorIOS, Text, TouchableHighlight, View } from 'react-native';
-    
+
     export default class NavigatorIOSApp extends Component {
       render() {
         return (
@@ -1547,7 +1549,7 @@ class MainScreen extends React.Component {
         )
       }
     }
-    
+
     class MyScene extends Component {
       static propTypes = {
         title: PropTypes.string.isRequired,
@@ -1586,7 +1588,8 @@ class MainScreen extends React.Component {
 - 安装：yarn add react-native-router-flux
 - 通过 npm 安装包的时候，会自动删除已经安装的包，此时，可以通过yarn重新全部安装即可
 
-```javascript
+```js
+
 // 1 导入 React 组件
 import React, { Component } from 'react';
 // 2 导入 路由 组件
@@ -1609,6 +1612,7 @@ export default class App extends Component {
     )
   }
 }
+
 ```
 
 ### 使用说明
