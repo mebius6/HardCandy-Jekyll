@@ -75,45 +75,54 @@ console.log(arrNew);  // red,blue,green
 ```
 ##### valueOf
 - 在《JavaScript高级教程》中，提到调用数组的valueOf()和toString()方法会返回相同的值。而实际上并非这样，valueOf()方法会返回数组的原始值。
+
 ```js
 var arr = ["red", "blue", "green"];
 var arrNew = arr.valueOf();
 console.log(arr);  // ["red", "blue", "green"]
 console.log(arrNew);  // ["red", "blue", "green"]
 ```
+
 ##### join
 - join()方法使用指定的分隔符，将数组的每个元素连接起来，返回构建的字符串。
 使用join()重现toString()方法的输出：arr.join(',')
+
 ```js
 var arr = ["red", "blue", "green"];
 var arrNew = arr.join(',');
 console.log(arr);  // ["red", "blue", "green"]
 console.log(arrNew);  // red,blue,green
 ```
+
 #### 操作方法
 ##### concat
 - concat()方法可以基于当前数组中的所有项创建一个新数组。
 具体来说，concat()方法会先创建当前数组的一个副本，然后将接收的参数添加到这个副本的末尾，最后返回新构建的数组。
 如果没有给concat()方法传递参数，只是复制当前数组并返回副本。如果给concat()方法传递一个或多个数组，则会将数组的每一项都添加到结果数组中。
+
 ```js
 var arr = ['A', 'B', 'C'];
 var arrNew = arr.concat(1, 2, [3, 4]);
 console.log(arr);  // ['A', 'B', 'C']
 console.log(arrNew);  // ['A', 'B', 'C', 1, 2, 3, 4]
 ```
+
 ##### slice
 - slice()方法可以基于当前数组中的一项或多项创建一个新数组。
 slice()方法可以接收一或两个参数，即要返回项的起始和结束位置，但不包括结束位置。如果只有一个参数，slice()方法返回起始位置到数组末尾的所有项。如果参数为负数，则用数组长度+该参数来确定相应的位置。
+
 ```js
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: ['A', 'B', 'C']
 console.log(arr); // ["A", "B", "C", "D", "E", "F", "G"]
 ```
+
 #### 位置方法
 ES5中定义了2中数组位置方法。每个方法接收两个参数：要查找的项、表示查找起点位置的索引。其中，第二个参数可选。
 
 ##### indexOf
 - indexOf()方法可以搜索一个指定元素的位置，返回该项在数组中的位置。如果没找到，则返回-1。indexOf()是从数组的开头开始向后查找。
+
 ```js
 var arr = [10, 20, '30', 'xyz', 20];
 var pos = arr.indexOf(20);
@@ -127,11 +136,13 @@ var pos = arr.lastIndexOf(20);
 console.log(arr);  // [10, 20, "30", "xyz", 20]
 console.log(pos);  // 4
 ```
+
 #### 迭代方法
 ES5中定义了5种数组迭代方法。每个方法都接收两个参数：要在每一项上运行的函数，和运行该函数的作用于对象。其中，第二个参数可选。传入这些方法中的函数会接收三个参数：数组项的值、该项的索引、数组对象本身。
 
 ##### forEach
 - 对数组中的每一项运行给定函数。forEach()方法没有返回值。
+
 ```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var eachResult = arr.forEach(function(item, index, self) {
@@ -140,8 +151,10 @@ var eachResult = arr.forEach(function(item, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5, 4, 3, 2, 1]
 console.log(eachResult);  // undefined
 ```
+
 ##### map
 - 对数组中的每一项运行给定函数。 map()方法返回每次函数调用的结果组成的数组。
+
 ```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var mapResult = arr.map(function(item, index, self) {
@@ -150,8 +163,10 @@ var mapResult = arr.map(function(item, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5, 4, 3, 2, 1]
 console.log(mapResult);  // [2, 4, 6, 8, 10, 8, 6, 4, 2]
 ```
+
 ##### filter
 - 对数组中的每一项运行给定函数。filter()方法返回使给定函数返回true的项组成的数组。
+
 ```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var filterResult = arr.filter(function(item, index, self) {
@@ -160,8 +175,10 @@ var filterResult = arr.filter(function(item, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5, 4, 3, 2, 1]
 console.log(filterResult);  // [3, 4, 5, 4, 3]
 ```
+
 ##### every
 - 对数组中的每一项运行给定函数。every()方法会返回布尔值，如果给定函数对数组每一项都返回true，则返回true。
+
 ```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var everyResult = arr.every(function(item, index, self) {
@@ -170,8 +187,10 @@ var everyResult = arr.every(function(item, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5, 4, 3, 2, 1]
 console.log(everyResult);  // false
 ```
+
 ##### some
 - 对数组中的每一项运行给定函数。some()方法会返回布尔值，如果给定函数对数组任意一项返回true，则返回true。
+
 ```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var someResult = arr.some(function(item, index, self) {
@@ -180,11 +199,13 @@ var someResult = arr.some(function(item, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5, 4, 3, 2, 1]
 console.log(someResult);  // true
 ```
+
 #### 缩小方法
 ES5中定义了2种数组缩小方法。每个方法都接收两个参数：在每一项上调用的函数、作为缩小基础的初始值。其中，第二个参数可选。传入这些方法中的函数会接收四个参数：前一个值、当前值、项的索引、数组对象。
 
 ##### reduce
 - reduce()方法会迭代数组中的所有项，然后构建一个最终返回值。reduce()方法从数组的第一项开始，逐个遍历到最后。
+
 ```js
 var arr = [1, 2, 3, 4, 5];
 var reduceResult = arr.reduce(function(prev, cur, index, self) {
@@ -193,8 +214,10 @@ var reduceResult = arr.reduce(function(prev, cur, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5]
 console.log(reduceResult);  // 15
 ```
+
 ##### reduceRight
 - reduceRight()方法与reduce()方法类似，区别在于：reduceRight()从数组的最后一项开始，向前遍历到第一项。
+
 ```js
 var arr = [1, 2, 3, 4, 5];
 var rightResult = arr.reduceRight(function(prev, cur, index, self) {
@@ -203,8 +226,10 @@ var rightResult = arr.reduceRight(function(prev, cur, index, self) {
 console.log(arr);  // [1, 2, 3, 4, 5]
 console.log(rightResult);  // 15
 ```
+
 ##   2.字符串操作
 ###    2-1去除字符串空格
+
 ```js
     //去除空格  type 1-所有空格  2-前后空格  3-前空格 4-后空格
     //ecDo.trim('  1235asd',1)
@@ -225,9 +250,11 @@ console.log(rightResult);  // 15
                 return str;
         }
     }
-```   
+``` 
+
 ###     2-2字母大小写切换
--    
+
+```js  
     /*type
      1:首字母大写
      2：首页母小写
@@ -235,7 +262,8 @@ console.log(rightResult);  // 15
      4：全部大写
      5：全部小写
      */
-```js
+
+
     //ecDo.changeCase('asdasd',1)
     //result：Asdasd
     changeCase: function (str, type) {
@@ -274,6 +302,7 @@ console.log(rightResult);  // 15
     }
 ```    
 ###    2-3字符串循环复制
+
 ```js  
             //repeatStr(str->字符串, count->次数)
             //ecDo.repeatStr('123',3)
@@ -288,6 +317,7 @@ console.log(rightResult);  // 15
             }
 ```    
 ###    2-4字符串替换
+
 ```js 
         //ecDo.replaceAll('这里是上海，中国第三大城市，广东省省会，简称穗，','上海','广州')
 
@@ -299,6 +329,7 @@ console.log(rightResult);  // 15
         }
 ```    
 ### 2-5替换
+
 ```js 
             //字符替换*
             //replaceStr(字符串,字符格式, 替换方式,替换的字符（默认*）)
@@ -344,6 +375,7 @@ console.log(rightResult);  // 15
             }
 ```   
 ### 2-6检测字符串
+
 ```js   
         //检测字符串
         //ecDo.checkType('165226226326','phone')
@@ -375,6 +407,7 @@ console.log(rightResult);  // 15
         }
 ```        
 ### 2-7 检测密码强度
+
 ```js   
     //ecDo.checkPwd('12asdASAD')
     //result：3(强度等级为3)
@@ -399,6 +432,7 @@ console.log(rightResult);  // 15
     }
 ```    
 ### 2-8随机码（toString详解）
+
 ```js    
     //count取值范围0-36
     //ecDo.randomWord(10)
@@ -415,6 +449,7 @@ console.log(rightResult);  // 15
     可能标题会有点误导，下面我就简单说明一个需求，
     在字符串'sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967'
     中找出'blog'的出现次数。代码如下
+
 ```js 
     //var strTest='sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967'
     //ecDo.countStr(strTest,'blog')
@@ -424,12 +459,15 @@ console.log(rightResult);  // 15
     }
 ```
 ### 2-9 去掉两边
+
 ```js
 var str = 'abcd';
 str.replace(/(^.)|(.$)/g, '')
 "bc"
 ```
+
 ### 2-10 过滤字符串 
+
 ```js 
     //过滤字符串(html标签，表情，特殊字符)
     //字符串，替换内容（special-特殊字符,html-html标签,emjoy-emjoy表情,word-小写字母，WORD-大写字母，number-数字,chinese-中文），要替换成什么，默认'',保留哪些特殊字符
@@ -491,6 +529,7 @@ str.replace(/(^.)|(.$)/g, '')
     }
 ```    
 ###  2-11格式化处理字符串
+
 ```js 
     //ecDo.formatText('1234asda567asd890')
     //result："12,34a,sda,567,asd,890"
