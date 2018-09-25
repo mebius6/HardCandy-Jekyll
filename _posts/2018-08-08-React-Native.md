@@ -837,8 +837,7 @@ export default class UselessTextInput extends Component {
   headers: {
     Pragma: 'no-cache'
   },
-  body: 'Your Body goes here'
-}} style={{width: 400, height: 400}} />
+  body: 'Your Body goes here'}} style={{width: 400, height: 400}} />
 
 ```
 
