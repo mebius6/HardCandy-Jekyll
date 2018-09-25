@@ -832,7 +832,7 @@ export default class UselessTextInput extends Component {
 
 //可以在Image组件的source属性中指定一些请求参数
 <Image source={{
-  uri: 'https://facebook.github.io/react/img/logo_og.png',
+  uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg',
   method: 'POST',
   headers: {
     Pragma: 'no-cache'
@@ -849,10 +849,15 @@ style={{width: 400, height: 400}} />
        - reload：URL的数据将从原始地址加载。不使用现有的缓存数据。
        - force-cache：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则从原始地加载。
        - only-if-cached：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则不尝试从原始地址加载，并且认为请求是失败的。
+
+```JS
+<Image source={{
+  uri: 'https://facebook.github.io/react/img/logo_og.png',
+  cache: 'only-if-cached'
+  }}
+  style={{width: 400, height: 400}} />
 ```
-<Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png', cache: 'only-if-cached'}}
-       style={{width: 400, height: 400}} />
-```
+
 - ##### CameraRoll 
   - CameraRoll模块提供了访问本地相册的功能。
 - ##### 背景图片组件ImageBackground
