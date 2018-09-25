@@ -548,7 +548,8 @@ export default class BlinkApp extends Component {
 #### 样式
 
 实际开发中组件的样式会越来越复杂，我们建议使用StyleSheet.create来集中定义组件的样式,你还可以传入一个数组——在数组中位置居后的样式对象比居前的优先级更高，这样你可以间接实现样式的继承。
-```
+
+```js
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
@@ -580,8 +581,10 @@ AppRegistry.registerComponent('LotsOfStyles', () => LotsOfStyles);
 ```
 
 #### 网络请求 Fetch
+
 - ##### 发起网络请求
-```
+
+```js
 //要从任意地址获取内容的话，只需简单地将网址作为参数传递给fetch方法即可
 fetch('https://mywebsite.com/mydata.json')
 //Fetch还有可选的第二个参数，可以用来定制HTTP请求一些参数。你可以指定header参数，或是指定使用POST方法，又或是提交数据等等：
@@ -606,9 +609,12 @@ fetch('https://mywebsite.com/endpoint/', {
   body: 'key1=value1&key2=value2'
 })
 ```
+
 - ##### 处理服务器的响应数据
+
   - ###### Fetch 方法会返回一个Promise，这种模式可以简化异步风格的代码
-  ```js
+
+```js
   getMoviesFromApiAsync() {
     return fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
@@ -619,9 +625,12 @@ fetch('https://mywebsite.com/endpoint/', {
         console.error(error);
       });
   }
-  ```
-   - 你也可以在React Native应用中使用ES7标准中的async/await 语法：
-  ```
+
+```
+
+- 你也可以在React Native应用中使用ES7标准中的async/await 语法：
+
+```js
    // 注意这个方法前面有async关键字
   async getMoviesFromApi() {
     try {
@@ -633,13 +642,14 @@ fetch('https://mywebsite.com/endpoint/', {
       console.error(error);
     }
   }
-  ```
-  - ###### 别忘了catch住fetch可能抛出的异常，否则出错时你可能看不到任何提示。
+```
+
+- ###### 别忘了catch住fetch可能抛出的异常，否则出错时你可能看不到任何提示。
   
 - ##### 使用其他的网络库
   - ###### React Native中已经内置了XMLHttpRequest API(也就是俗称的ajax)。一些基于XMLHttpRequest封装的第三方库也可以使用，例如frisbee或是axios等。但注意不能使用jQuery，因为jQuery中还使用了很多浏览器中才有而RN中没有的东西
-  
-  ```
+
+```js
       var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
       if (request.readyState !== 4) {
@@ -655,11 +665,13 @@ fetch('https://mywebsite.com/endpoint/', {
     
     request.open('GET', 'https://mywebsite.com/endpoint/');
     request.send();
-  ```
+```
+
   - ###### 安全机制与网页环境有所不同：在应用中你可以访问任何网站，没有跨域的限制。
 - ##### WebSocket支持
   - ###### React Native还支持WebSocket，这种协议可以在单个TCP连接上提供全双工的通信信道。
-  ```
+
+```js
     var ws = new WebSocket('ws://host.com/path');
     
     ws.onopen = () => {
@@ -682,11 +694,11 @@ fetch('https://mywebsite.com/endpoint/', {
       // 连接被关闭了
       console.log(e.code, e.reason);
     };
-  ```
+```
 
 ### 修改项目首屏页面
 
-```
+```js
 import React, { Component } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 
@@ -755,9 +767,10 @@ View / Text / TextInput / Image / Button
   - onChangeText事件:读取用户的输入,在onChangeText中用setState把用户的输入写入到state中，然后在需要取值的地方从this.state中取出值。(注意，从TextInput里取值这就是目前唯一的做法！)
   - onSubmitEditing:提交事件
   - onFocus
-  
+
 ```js
- import React, { Component } from 'react';
+
+import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 
 export default class UselessTextInput extends Component {
@@ -771,10 +784,12 @@ export default class UselessTextInput extends Component {
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-    
- ```
- ```
+        value={this.state.text} />)
+  }
+}
+```
+
+```js
     <View style={styles.container}>
        <TextInput style={styles.inputStyle}
          //value={'我是默认的'}     /*该文字无法删除*/
@@ -796,7 +811,7 @@ export default class UselessTextInput extends Component {
 
 - ##### 作用：相当于HTML中的img标签，用来展示图片
 
-- ##### 本地资源，使用`require(相对路径)`
+- ##### 本地资源，使用require(相对路径)
 
 ```js
 <Image source={require('./images/1.jpg')} style={{width:200, height:200, borderRadius:100, backgroundColor:'red'}} resizeMode="stretch"/>
@@ -806,10 +821,15 @@ export default class UselessTextInput extends Component {
 - ##### 注意：引用网络资源的时候，必须提前指定宽高
 
 ```js
-<Image source={{uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg'}} style={{width:150 ,height:150}}/>
+<Image source={{
+  uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg'
+  }} style={{width:150 ,height:150}} />
 ```
-- ##### 网络图片的请求参数
+
+##### 网络图片的请求参数
+
 ```js
+
 //可以在Image组件的source属性中指定一些请求参数
 <Image source={{
   uri: 'https://facebook.github.io/react/img/logo_og.png',
@@ -821,6 +841,7 @@ export default class UselessTextInput extends Component {
 }}
 style={{width: 400, height: 400}} />
 ```
+
 - ##### 缓存控制（仅iOS）
     - 仅仅想展示一张已经在本地缓存的图片
    - ###### cache
