@@ -1,4 +1,13 @@
-# JavaScript函数库
+---
+layout: post
+title:  "JavaScript函数库"
+date:   2018-09-19
+tags:  js vue
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
+
 ## 1.JavaSript中数组方法是否对原数组产生影响
 ### 产生影响
 #### 栈方法

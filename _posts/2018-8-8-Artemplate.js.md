@@ -1,3 +1,13 @@
+---
+layout: post
+title:  "artTemplate"
+date:   2018-08-08
+tags:  js
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
+
 #### 主要记录三种使用artTemplate的方法。
 
 - template(id, data)

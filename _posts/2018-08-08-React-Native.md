@@ -1,3 +1,13 @@
+---
+layout: post
+title:  "ReactNative"
+date:   2018-08-08
+tags:  js react-native 
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
+
 # ReactNative - 概念和环境
 
 - [谁在用React Native](https://facebook.github.io/react-native/showcase.html)
@@ -304,7 +314,7 @@ yarn 相对于 npm 来说，下载速度更快
 在 react-native 项目中，不要使用 npm或cnpm 来下载包！！！
 ```
 
-```
+```python
 # 设置yarn仓库镜像：
 yarn config set registry https://registry.npm.taobao.org --global
 
@@ -548,7 +558,8 @@ export default class BlinkApp extends Component {
 #### 样式
 
 实际开发中组件的样式会越来越复杂，我们建议使用StyleSheet.create来集中定义组件的样式,你还可以传入一个数组——在数组中位置居后的样式对象比居前的优先级更高，这样你可以间接实现样式的继承。
-```
+
+```js
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View } from 'react-native';
 
@@ -580,8 +591,10 @@ AppRegistry.registerComponent('LotsOfStyles', () => LotsOfStyles);
 ```
 
 #### 网络请求 Fetch
+
 - ##### 发起网络请求
-```
+
+```js
 //要从任意地址获取内容的话，只需简单地将网址作为参数传递给fetch方法即可
 fetch('https://mywebsite.com/mydata.json')
 //Fetch还有可选的第二个参数，可以用来定制HTTP请求一些参数。你可以指定header参数，或是指定使用POST方法，又或是提交数据等等：
@@ -606,9 +619,12 @@ fetch('https://mywebsite.com/endpoint/', {
   body: 'key1=value1&key2=value2'
 })
 ```
+
 - ##### 处理服务器的响应数据
+
   - ###### Fetch 方法会返回一个Promise，这种模式可以简化异步风格的代码
-  ```js
+
+```js
   getMoviesFromApiAsync() {
     return fetch('https://facebook.github.io/react-native/movies.json')
       .then((response) => response.json())
@@ -619,9 +635,12 @@ fetch('https://mywebsite.com/endpoint/', {
         console.error(error);
       });
   }
-  ```
-   - 你也可以在React Native应用中使用ES7标准中的async/await 语法：
-  ```
+
+```
+
+- 你也可以在React Native应用中使用ES7标准中的async/await 语法：
+
+```js
    // 注意这个方法前面有async关键字
   async getMoviesFromApi() {
     try {
@@ -633,13 +652,14 @@ fetch('https://mywebsite.com/endpoint/', {
       console.error(error);
     }
   }
-  ```
-  - ###### 别忘了catch住fetch可能抛出的异常，否则出错时你可能看不到任何提示。
+```
+
+- ###### 别忘了catch住fetch可能抛出的异常，否则出错时你可能看不到任何提示。
   
 - ##### 使用其他的网络库
   - ###### React Native中已经内置了XMLHttpRequest API(也就是俗称的ajax)。一些基于XMLHttpRequest封装的第三方库也可以使用，例如frisbee或是axios等。但注意不能使用jQuery，因为jQuery中还使用了很多浏览器中才有而RN中没有的东西
-  
-  ```
+
+```js
       var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
       if (request.readyState !== 4) {
@@ -655,11 +675,13 @@ fetch('https://mywebsite.com/endpoint/', {
     
     request.open('GET', 'https://mywebsite.com/endpoint/');
     request.send();
-  ```
+```
+
   - ###### 安全机制与网页环境有所不同：在应用中你可以访问任何网站，没有跨域的限制。
 - ##### WebSocket支持
   - ###### React Native还支持WebSocket，这种协议可以在单个TCP连接上提供全双工的通信信道。
-  ```
+
+```js
     var ws = new WebSocket('ws://host.com/path');
     
     ws.onopen = () => {
@@ -682,11 +704,11 @@ fetch('https://mywebsite.com/endpoint/', {
       // 连接被关闭了
       console.log(e.code, e.reason);
     };
-  ```
+```
 
 ### 修改项目首屏页面
 
-```
+```js
 import React, { Component } from 'react';
 import { SectionList, StyleSheet, Text, View } from 'react-native';
 
@@ -755,9 +777,10 @@ View / Text / TextInput / Image / Button
   - onChangeText事件:读取用户的输入,在onChangeText中用setState把用户的输入写入到state中，然后在需要取值的地方从this.state中取出值。(注意，从TextInput里取值这就是目前唯一的做法！)
   - onSubmitEditing:提交事件
   - onFocus
-  
+
 ```js
- import React, { Component } from 'react';
+
+import React, { Component } from 'react';
 import { TextInput } from 'react-native';
 
 export default class UselessTextInput extends Component {
@@ -771,10 +794,12 @@ export default class UselessTextInput extends Component {
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-    
- ```
- ```
+        value={this.state.text} />)
+  }
+}
+```
+
+```js
     <View style={styles.container}>
        <TextInput style={styles.inputStyle}
          //value={'我是默认的'}     /*该文字无法删除*/
@@ -796,7 +821,7 @@ export default class UselessTextInput extends Component {
 
 - ##### 作用：相当于HTML中的img标签，用来展示图片
 
-- ##### 本地资源，使用`require(相对路径)`
+- ##### 本地资源，使用require(相对路径)
 
 ```js
 <Image source={require('./images/1.jpg')} style={{width:200, height:200, borderRadius:100, backgroundColor:'red'}} resizeMode="stretch"/>
@@ -806,21 +831,37 @@ export default class UselessTextInput extends Component {
 - ##### 注意：引用网络资源的时候，必须提前指定宽高
 
 ```js
-<Image source={{uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg'}} style={{width:150 ,height:150}}/>
+<Image source={{
+  uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg'
+  }} style={{width:150 ,height:150}} />
 ```
-- ##### 网络图片的请求参数
+
+##### 支持的图片格式
+- （1）React Native 默认支持 JPG、PNG 格式。
+- （2）在 iOS 平台下，还支持 GIF、WebP 格式。
+- （3）在 Android 平台下，默认不支持 GIF、WebP 格式。可以通过修改 Android 工程设置让其支持这两种格式：
+打开项目目录下的 android/app/build.gradle，视情况添加相关代码：
+
 ```js
+dependencies {
+  compile 'com.facebook.fresco:animated-gif:0.11.0'  //需要GIF动画支持添加本行语句
+  compile 'com.facebook.fresco:webpsupport:0.11.0'  //需要WebP格式支持添加本行语句
+  compile 'com.facebook.fresco:animated-webp:0.11.0'  //需要WebP动画支持添加本行语句
+}
+```
+##### 网络图片的请求参数
+
+```js
+
 //可以在Image组件的source属性中指定一些请求参数
 <Image source={{
-  uri: 'https://facebook.github.io/react/img/logo_og.png',
+  uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg',
   method: 'POST',
-  headers: {
-    Pragma: 'no-cache'
-  },
-  body: 'Your Body goes here'
-}}
-style={{width: 400, height: 400}} />
+  body: 'Your Body goes here'}} style={{width: 400, height: 400}} />
+  //headers: {  Pragma: 'no-cache' }
+
 ```
+
 - ##### 缓存控制（仅iOS）
     - 仅仅想展示一张已经在本地缓存的图片
    - ###### cache
@@ -828,10 +869,47 @@ style={{width: 400, height: 400}} />
        - reload：URL的数据将从原始地址加载。不使用现有的缓存数据。
        - force-cache：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则从原始地加载。
        - only-if-cached：现有的缓存数据将用于满足请求，忽略其期限或到期日。如果缓存中没有对应请求的数据，则不尝试从原始地址加载，并且认为请求是失败的。
+
+```JS
+<Image source={{
+  uri: 'https://facebook.github.io/react/img/logo_og.png',
+  cache: 'only-if-cached'
+  }} style={{width: 400, height: 400}} />
 ```
-<Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png', cache: 'only-if-cached'}}
-       style={{width: 400, height: 400}} />
+
+##### 网络图片加载监听
+对于网络图片的加载，ReactNative提供了一些属性用于图片不同加载时期的监听。
+
+- onLoadStart 图片开始加载时调用
+- onLoad
+图片加载完成时调用，此时图片加载成功
+- onLoadEnd
+加载结束后调用，与onLoad不同的是不论成功还是失败，此回调函数都会被执行。
+
+使用方法如下
+
+```js
+<Image
+   source={{uri:'https://facebook.github.io/react/img/logo_og.png'}}
+   style={[styles.base, {overflow: 'visible'}]}
+   onLoadStart={() => console.log('onLoadStart')}
+   onLoad={(event) => console.log('onLoad') }
+   onLoadEnd={() =>  console.log('onLoadEnd')}
+            />
+
+
+//对于iOS，还提供了加载进度的回调函数onProgress
+<Image
+   style={styles.image}
+   onProgress={(event) => {
+      console.log('onProgress')
+      this.setState({
+        progress: Math.round(100 * event.nativeEvent.loaded / event.nativeEvent.total)
+    })}}/>
+
+
 ```
+
 - ##### CameraRoll 
   - CameraRoll模块提供了访问本地相册的功能。
 - ##### 背景图片组件ImageBackground
@@ -936,43 +1014,44 @@ AppRegistry.registerComponent('PerfectProject',() => PerfectProject);
 - ##### 如果你需要显示较长的滚动列表，那么应该使用功能差不多但性能更好的ListView组件。
 - ScrollView属性列表
 
-名称| value|作用
----|---|---
-contentContainerStyle | 样式风格属性(传入StyleSheet创建的Style文件)| 这些样式会应用到一个内层的内容容器上，所有的子视图都会包裹在内容容器内。
-horizontal | bool| 当此属性为true的时候，所有的的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。
-keyboardDismissMode| enum('none', "interactive", 'on-drag') |用户拖拽滚动视图的时候，是否要隐藏软键盘。none（默认值），拖拽时不隐藏软键盘。on-drag 当拖拽开始的时候隐藏软键盘。interactive 软键盘伴随拖拽操作同步地消失，并且如果往上滑动会恢复键盘。安卓设备上不支持这个选项，会表现的和none一样。
-keyboardShouldPersistTaps|bool|当此属性为false的时候，在软键盘激活之后，点击焦点文本输入框以外的地方，键盘就会隐藏。如果为true，滚动视图不会响应点击操作，并且键盘不会自动消失。默认值为false。
-onContentSizeChange|function |此函数会在ScrollView内部可滚动内容的视图发生变化时调用。调用参数为内容视图的宽和高: (contentWidth, contentHeight)此方法是通过绑定在内容容器上的onLayout来实现的。
-onScroll |function|在滚动的过程中，每帧最多调用一次此回调函数。调用的频率可以用scrollEventThrottle属性来控制。
-refreshControl |element|指定RefreshControl组件，用于为ScrollView提供下拉刷新功能。
-removeClippedSubviews|bool|（实验特性）：当此属性为true时，屏幕之外的子视图（子视图的overflow样式需要设为hidden）会被移除。这个可以提升大列表的滚动性能。默认值为true。
-showsHorizontalScrollIndicator|bool|当此属性为true的时候，显示一个水平方向的滚动条。
-showsVerticalScrollIndicator|bool|当此属性为true的时候，显示一个垂直方向的滚动条。有时候滚动视图会占据比实际内容更多的空间。这种情况下可以使用此属性，指定以某种颜色来填充多余的空间，以避免设置背景和创建不必要的绘制开销。一般情况下并不需要这种高级优化技巧。
-（ios）alwaysBounceHorizontal|bool|当此属性为true时，水平方向即使内容比滚动视图本身还要小，也可以弹性地拉动一截。当horizontal={true}时默认值为true，否则为false。
-（ios）alwaysBounceVertical|bool|当此属性为true时，垂直方向即使内容比滚动视图本身还要小，也可以弹性地拉动一截。当horizontal={true}时默认值为false，否则为true。
-（ios）automaticallyAdjustContentInsets|bool|如果滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）
-（ios）bounces|bool|当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使alwaysBounce*属性为true。默认值为true。
-（ios）bouncesZoom|bool|当值为true时，使用手势缩放内容可以超过min/max的限制，然后在手指抬起之后弹回min/max的缩放比例。否则的话，缩放不能超过限制。
-（ios）canCancelContentTouches |bool |当值为false时，一旦有子节点响应触摸操作，即使手指开始移动也不会拖动滚动视图。默认值为true（在以上情况下可以拖动滚动视图。）
-（ios）centerContent|bool|当值为true时，如果滚动视图的内容比视图本身小，则会自动把内容居中放置。当内容比滚动视图大的时候，此属性没有作用。默认值为false。
-（ios）contentInset|{top: number, left: number, bottom: number, right: number} |内容范围相对滚动视图边缘的坐标。默认为{0, 0, 0, 0}。
-（ios）contentOffset|PointPropType |用来手动设置初始的滚动坐标。默认值为{x: 0, y: 0}。
-（ios）decelerationRate|number |一个浮点数，用于决定当用户抬起手指之后，滚动视图减速停下的速度。常见的选项有：Normal: 0.998 (默认值)；Fast: 0.9
-（ios）directionalLockEnabled| bool|当值为真时，滚动视图在拖拽的时候会锁定只有垂直或水平方向可以滚动。默认值为false。
-（ios）maximumZoomScale|number|允许的最大缩放比例。默认值为1.0。
-（ios）minimumZoomScale|number|允许的最小缩放比例。默认值为1.0。 
-（ios）onScrollAnimationEnd|function|当滚动动画结束之后调用此回调。
-pagingEnabled|bool|当值为true时，滚动条会停在滚动视图的尺寸的整数倍位置。这个可以用在水平分页上。默认值为false。
-（ios）scrollEnabled|bool|当值为false的时候，内容不能滚动，默认值为true。
-（ios）scrollEventThrottle|number|这个属性控制在滚动过程中，scroll事件被调用的频率（单位是每秒事件数量）。更大的数值能够更及时的跟踪滚动位置，不过可能会带来性能问题，因为更多的信息会通过bridge传递。默认值为0，意味着每次视图被滚动，scroll事件只会被调用一次。
-（ios）scrollIndicatorInsets|{top: number, left: number, bottom: number, right: number}|决定滚动条距离视图边缘的坐标。这个值应该和contentInset一样。默认值为{0, 0, 0, 0}。
-（ios）scrollsToTop|bool|当此值为true时，点击状态栏的时候视图会滚动到顶部。默认值为true。
-（ios）snapToAlignment|enum('start', "center", 'end') |当设置了snapToInterval，snapToAlignment会定义停驻点与滚动视图之间的关系。start (默认) 会将停驻点对齐在左侧（水平）或顶部（垂直）；center 会将停驻点对齐到中间；end 会将停驻点对齐到右侧（水平）或底部（垂直）
-（ios）snapToInterval|number|当设置了此属性时，会让滚动视图滚动停止后，停止在snapToInterval的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示。与snapToAlignment组合使用。
-（ios）stickyHeaderIndices|[number]|一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用
-（ios）zoomScale|number|滚动视图内容初始的缩放比例。默认值为1.0。
+|名称| value|作用
+|---|---|---
+|contentContainerStyle | 样式风格属性(传入StyleSheet创建的Style文件)| 这些样式会应用到一个内层的内容容器上，所有的子视图都会包裹在内容容器内。
+|horizontal | bool| 当此属性为true的时候，所有的的子视图会在水平方向上排成一行，而不是默认的在垂直方向上排成一列。默认值为false。
+|keyboardDismissMode| enum('none', "interactive", 'on-drag') |用户拖拽滚动视图的时候，是否要隐藏软键盘。none（默认值），拖拽时不隐藏软键盘。on-drag 当拖拽开始的时候隐藏软键盘。interactive 软键盘伴随拖拽操作同步地消失，并且如果往上滑动会恢复键盘。安卓设备上不支持这个选项，会表现的和none一样。
+|keyboardShouldPersistTaps|bool|当此属性为false的时候，在软键盘激活之后，点击焦点文本输入框以外的地方，键盘就会隐藏。如果为true，滚动视图不会响应点击操作，并且键盘不会自动消失。默认值为false。
+|onContentSizeChange|function |此函数会在ScrollView内部可滚动内容的视图发生变化时调用。调用参数为内容视图的宽和高: (contentWidth, contentHeight)此方法是通过绑定在内容容器上的onLayout来实现的。
+|onScroll |function|在滚动的过程中，每帧最多调用一次此回调函数。调用的频率可以用scrollEventThrottle属性来控制。
+|refreshControl |element|指定RefreshControl组件，用于为ScrollView提供下拉刷新功能。
+|removeClippedSubviews|bool|（实验特性）：当此属性为true时，屏幕之外的子视图（子视图的overflow样式需要设为hidden）会被移除。这个可以提升大列表的滚动性能。默认值为true。
+|showsHorizontalScrollIndicator|bool|当此属性为true的时候，显示一个水平方向的滚动条。
+|showsVerticalScrollIndicator|bool|当此属性为true的时候，显示一个垂直方向的滚动条。有时候滚动视图会占据比实际内容更多的空间。这种情况下可以使用此属性，指定以某种颜色来填充多余的空间，以避免设置背景和创建不必要的绘制开销。一般情况下并不需要这种高级优化技巧。
+|（ios）alwaysBounceHorizontal|bool|当此属性为true时，水平方向即使内容比滚动视图本身还要小，也可以弹性地拉动一截。当horizontal={true}时默认值为true，否则为false。
+|（ios）alwaysBounceVertical|bool|当此属性为true时，垂直方向即使内容比滚动视图本身还要小，也可以弹性地拉动一截。当horizontal={true}时默认值为false，否则为true。
+|（ios）automaticallyAdjustContentInsets|bool|如果滚动视图放在一个导航条或者工具条后面的时候，iOS系统是否要自动调整内容的范围。默认值为true。（译注：如果你的ScrollView或ListView的头部出现莫名其妙的空白，尝试将此属性置为false）
+|（ios）bounces|bool|当值为true时，如果内容范围比滚动视图本身大，在到达内容末尾的时候，可以弹性地拉动一截。如果为false，尾部的所有弹性都会被禁用，即使alwaysBounce*属性为true。默认值为true。
+|（ios）bouncesZoom|bool|当值为true时，使用手势缩放内容可以超过min/max的限制，然后在手指抬起之后弹回min/max的缩放比例。否则的话，缩放不能超过限制。
+|（ios）canCancelContentTouches |bool |当值为false时，一旦有子节点响应触摸操作，即使手指开始移动也不会拖动滚动视图。默认值为true（在以上情况下可以拖动滚动视图。）
+|（ios）centerContent|bool|当值为true时，如果滚动视图的内容比视图本身小，则会自动把内容居中放置。当内容比滚动视图大的时候，此属性没有作用。默认值为false。
+|（ios）contentInset|{top: number, left: number, bottom: number, right: number} |内容范围相对滚动视图边缘的坐标。默认为{0, 0, 0, 0}。
+|（ios）contentOffset|PointPropType |用来手动设置初始的滚动坐标。默认值为{x: 0, y: 0}。
+|（ios）decelerationRate|number |一个浮点数，用于决定当用户抬起手指之后，滚动视图减速停下的速度。常见的选项有：Normal: 0.998 (默认值)；Fast: 0.9
+|（ios）directionalLockEnabled| bool|当值为真时，滚动视图在拖拽的时候会锁定只有垂直或水平方向可以滚动。默认值为false。
+|（ios）maximumZoomScale|number|允许的最大缩放比例。默认值为1.0。
+|（ios）minimumZoomScale|number|允许的最小缩放比例。默认值为1.0。 
+|（ios）onScrollAnimationEnd|function|当滚动动画结束之后调用此回调。
+|pagingEnabled|bool|当值为true时，滚动条会停在滚动视图的尺寸的整数倍位置。这个可以用在水平分页上。默认值为false。
+|（ios）scrollEnabled|bool|当值为false的时候，内容不能滚动，默认值为true。
+|（ios）scrollEventThrottle|number|这个属性控制在滚动过程中，scroll事件被调用的频率（单位是每秒事件数量）。更大的数值能够更及时的跟踪滚动位置，不过可能会带来性能问题，因为更多的信息会通过bridge传递。默认值为0，意味着每次视图被滚动，scroll事件只会被调用一次。
+|（ios）scrollIndicatorInsets|{top: number, left: number, bottom: number, right: number}|决定滚动条距离视图边缘的坐标。这个值应该和contentInset一样。默认值为{0, 0, 0, 0}。
+|（ios）scrollsToTop|bool|当此值为true时，点击状态栏的时候视图会滚动到顶部。默认值为true。
+|（ios）snapToAlignment|enum('start', "center", 'end') |当设置了snapToInterval，snapToAlignment会定义停驻点与滚动视图之间的关系。start (默认) 会将停驻点对齐在左侧（水平）或顶部（垂直）；center 会将停驻点对齐到中间；end 会将停驻点对齐到右侧（水平）或底部（垂直）
+|（ios）snapToInterval|number|当设置了此属性时，会让滚动视图滚动停止后，停止在snapToInterval的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示。与snapToAlignment组合使用。
+|（ios）stickyHeaderIndices|[number]|一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用
+|（ios）zoomScale|number|滚动视图内容初始的缩放比例。默认值为1.0。
 - #### ScrollView样式
-```html
+
+```css
 
 //FlexBox布局
 Flexbox...
@@ -1031,6 +1110,7 @@ shadowRadius number
 
 androidendFillColor color 
 ```
+
 - #### 双指缩放
 - ##### 如果在ScrollView中只放置一个组件，则可以用来实现缩放操作。设置maximumZoomScale和minimumZoomScale属性即可以使用户能够缩放其中的内容。
 - #### 处理其他的手势(自定义手势)
@@ -1061,7 +1141,8 @@ onPanResponderMove: (event, gestureState) => {}
     - vx - 当前的横向移动速度
     - vy - 当前的纵向移动速度
     - numberActiveTouches - 当前在屏幕上的有效触摸点的数量
-```
+
+```js
  componentWillMount: function() {
     this._panResponder = PanResponder.create({
       // 要求成为响应者：
@@ -1169,7 +1250,7 @@ scrollToOffset(params: {animated?: ?boolean, offset:number})：
   - data是列表的数据源，
   - renderItem则从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染。
 - 下面的例子创建了一个简单的FlatList，并预设了一些模拟数据。首先是初始化FlatList所需的data，其中的每一项（行）数据之后都在renderItem中被渲染成了Text组件，最后构成整个FlatList。
-```
+```JS
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
@@ -1327,37 +1408,40 @@ render() {
 - #### 如果要渲染的是一组需要分组的数据，也许还带有分组标签的，那么SectionList将是个不错的选择.
 - #### SectionList常用属性和方法
   - ##### 属性集合
-属性名|类型|说明
----|---|---
-sections|Array|数据源
-ItemSeparatorComponent|ReactClass<any>|不会出现在第一行之前和最后一行之后
-SectionSeparatorComponent|ReactClass<any>|每个section之间的分隔组件
-ListEmptyComponent|	ReactClass<any>/React.Element<any>|列表为空时渲染该组件。可以是React Component, 也可以是一个render函数， 或者渲染好的element。
-ListFooterComponent|ReactClass<any>|尾部组件
-ListHeaderComponent|ReactClass<any>|头部组件
-data|Array<ItemT>|为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的VirtualizedList组件
-extraData|any|如果有除data以外的数据用在列表中（不论是用在renderItem还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。
-getItem|any|获取控件的绑定数据
-getItemCount|any|获取绑定数据的条数
-getItemLayout|(data: ?Array<ItemT>, index: number) => {length: number, offset: number, index: number}|getItemLayout是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，getItemLayout用起来就既高效又简单，类似下面这样：getItemLayout={(data, index) => ( {length: 行高, offset: 行高 * index, index} )}；注意如果你指定了SeparatorComponent，请把分隔线的尺寸也考虑到offset的计算之中。
-initialNumToRender|number|指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。
-keyExtractor|(item: ItemT, index: number) => string|此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。
-legacyImplementation|boolean|设置为true则使用旧的ListView的实现
-onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用
-onEndReachedThreshold|number|决定当距离内容最底部还有多远时触发onEndReached回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发
-onRefresh|void|如果设置了此选项，则会在列表头部添加一个标准的RefreshControl控件，以便实现“下拉刷新”的功能。同时你需要正确设置refreshing属性
-onViewableItemsChanged|(info: {viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void|在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置viewabilityconfig属性
-refreshing|boolean|在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号
-renderItem|(info: {item: ItemT, index: number}) => ?React.Element<any>|根据行数据data渲染每一行的组件
-viewabilityConfig|ViewabilityConfig|请参考[ViewabilityHelper](https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js)的源码来了解具体的配置
+
+| 属性名 | 类型 | 说明
+| --- |--- |--- |
+| sections | Array | 数据源  |
+| ItemSeparatorComponent |ReactClass<any> |不会出现在第一行之前和最后一行之后  |
+| SectionSeparatorComponent  | ReactClass<any>  | 每个section之间的分隔组件  |
+| ListEmptyComponent | ReactClass<any>/React.Element<any> | 列表为空时渲染该组件。可以是React Component, 也可以是一个render函数， 或者渲染好的element。  |
+| ListFooterComponent | ReactClass<any> | 尾部组件 |
+| ListHeaderComponent | ReactClass<any> |头部组件 |
+| data | Array<ItemT> | 为了简化起见，data属性目前只支持普通数组。如果需要使用其他特殊数据结构，例如immutable数组，请直接使用更底层的VirtualizedList组件 |
+| extraData | any | 如果有除data以外的数据用在列表中（不论是用在renderItem还是Header或者Footer中），请在此属性中指定。同时此数据在修改时也需要先修改其引用地址（比如先复制到一个新的Object或者数组中），然后再修改其值，否则界面很可能不会刷新。 |
+| getItem | any | 获取控件的绑定数据 |
+| getItemCount | any | 获取绑定数据的条数 |
+| getItemLayout | (data: ?Array<ItemT>, index: number) => {length: number, offset: number, index: number} | getItemLayout是一个可选的优化，用于避免动态测量内容尺寸的开销，不过前提是你可以提前知道内容的高度。如果你的行高是固定的，getItemLayout用起来就既高效又简单，类似下面这样：getItemLayout={(data, index) => ( {length: 行高, offset: 行高 * index, index} )}；注意如果你指定了SeparatorComponent，请把分隔线的尺寸也考虑到offset的计算之中。 |
+| initialNumToRender | number | 指定一开始渲染的元素数量，最好刚刚够填满一个屏幕，这样保证了用最短的时间给用户呈现可见的内容。注意这第一批次渲染的元素不会在滑动过程中被卸载，这样是为了保证用户执行返回顶部的操作时，不需要重新渲染首批元素。 |
+| keyExtractor | (item: ItemT, index: number) => string|此函数用于为给定的item生成一个不重复的key。Key的作用是使React能够区分同类元素的不同个体，以便在刷新时能够确定其变化的位置，减少重新渲染的开销。若不指定此函数，则默认抽取item.key作为key值。若item.key也不存在，则使用数组下标。 |
+| legacyImplementation | boolean | 设置为true则使用旧的ListView的实现
+onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用  |
+| onEndReachedThreshold | number | 决定当距离内容最底部还有多远时触发onEndReached回调。注意此参数是一个比值而非像素单位。比如，0.5表示距离内容最底部的距离为当前列表可见长度的一半时触发 |
+| onRefresh | void | 如果设置了此选项，则会在列表头部添加一个标准的RefreshControl控件，以便实现“下拉刷新”的功能。同时你需要正确设置refreshing属性 |
+| onViewableItemsChanged | (info: {viewableItems: Array<ViewToken>, changed: Array<ViewToken>}) => void | 在可见行元素变化时调用。可见范围和变化频率等参数的配置请设置viewabilityconfig属性 |
+| refreshing | boolean | 在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号 |
+| renderItem | (info: {item: ItemT, index: number}) => ?React.Element<any> | 根据行数据data渲染每一行的组件 |
+| viewabilityConfig | ViewabilityConfig | 请参考[ViewabilityHelper](https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js)的源码来了解具体的配置 |
   - ##### 方法集合
- 方法名|说明
- ---|---
-scrollToLocation|将可视区内位于特定sectionIndex 或 itemIndex(section内)位置的列表项，滚动到可视区的制定位置。比如说，viewPosition 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。viewOffset是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间。注意: 如果没有设置getItemLayout，就不能滚动到位于外部渲染区的位置。
-recordInteraction|主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当waitForInteractions 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。
-flashScrollIndicators|短暂地显示滚动指示器。
- - ##### SectionList示例，通讯录实现以及源码
-```
+| 方法名|说明
+| --- | --- |
+| scrollToLocation | 将可视区内位于特定sectionIndex 或 itemIndex(section内)位置的列表项，滚动到可视区的制定位置。比如说，viewPosition 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。viewOffset是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间。注意: 如果没有设置getItemLayout，就不能滚动到位于外部渲染区的位置。 |
+| recordInteraction | 主动通知列表发生了一个事件，以使列表重新计算可视区域。比如说当waitForInteractions 为 true 并且用户没有滚动列表时，就可以调用这个方法。不过一般来说，当用户点击了一个列表项，或发生了一个导航动作时，我们就可以调用这个方法。 |
+| flashScrollIndicators | 短暂地显示滚动指示器。 |
+
+- ##### SectionList示例，通讯录实现以及源码
+ 
+```JS
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -1457,10 +1541,11 @@ class MainScreen extends React.Component {
   - 如果你只针对iOS平台开发，那么可以考虑使用NavigatorIOS。它是基于 UINavigationController封装的，所以看起来很像。
   - NavigatorIOS使用路由要渲染的组件在路由对象的component字段中指定，要给目标组件传递的参数则写在passProps中。被渲染的component都会自动接受到一个名为navigator的属性，你可以直接调用此对象(this.props.navigator)的push和pop方法。
   - 由于NavigatorIOS使用的是原生的UIKit导航，所以它会自动渲染一个带有返回按钮和标题的导航栏。
-  ```
+
+```jsx
     import React, { Component, PropTypes } from 'react';
     import { NavigatorIOS, Text, TouchableHighlight, View } from 'react-native';
-    
+
     export default class NavigatorIOSApp extends Component {
       render() {
         return (
@@ -1474,7 +1559,7 @@ class MainScreen extends React.Component {
         )
       }
     }
-    
+
     class MyScene extends Component {
       static propTypes = {
         title: PropTypes.string.isRequired,
@@ -1503,16 +1588,18 @@ class MainScreen extends React.Component {
         )
       }
     }
-  ```
+```
+
 - [RN router - github](https://github.com/aksonov/react-native-router-flux):RNRF v4基于react-navigation，功能更强大
 - [Mini-Tutorial（使用指南）](https://github.com/aksonov/react-native-router-flux/blob/v3/docs/MINI_TUTORIAL.md)
 
 ### 基本使用
 
-- 安装：`yarn add react-native-router-flux`
-- 通过 `npm` 安装包的时候，会自动删除已经安装的包，此时，可以通过`yarn`重新全部安装即可`
+- 安装：yarn add react-native-router-flux
+- 通过 npm 安装包的时候，会自动删除已经安装的包，此时，可以通过yarn重新全部安装即可
 
 ```js
+
 // 1 导入 React 组件
 import React, { Component } from 'react';
 // 2 导入 路由 组件
@@ -1535,6 +1622,7 @@ export default class App extends Component {
     )
   }
 }
+
 ```
 
 ### 使用说明
@@ -1793,7 +1881,7 @@ const {height, width} = Dimensions.get('window');
 - 获取参数：`props.navigation.state.params.msg`
   - msg 表示要获取的参数名称
 
-```js
+```jsx
 import { StackNavigator } from 'react-navigation'
 
 const Home = (props) => {
@@ -1832,7 +1920,7 @@ export default StackNavigator({
 
 - 2 TabNavigator
 
-```js
+```jsx
 import {TabNavigator} from 'react-navigation'
 // Tab路由配置
 const menus = {
@@ -1883,7 +1971,7 @@ export default TabBar
 
 - 3 StackNavigator 结合 TabNavigator
 
-```js
+```jsx
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
