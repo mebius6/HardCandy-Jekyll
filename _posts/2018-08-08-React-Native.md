@@ -826,6 +826,19 @@ export default class UselessTextInput extends Component {
   }} style={{width:150 ,height:150}} />
 ```
 
+##### 支持的图片格式
+- （1）React Native 默认支持 JPG、PNG 格式。
+- （2）在 iOS 平台下，还支持 GIF、WebP 格式。
+- （3）在 Android 平台下，默认不支持 GIF、WebP 格式。可以通过修改 Android 工程设置让其支持这两种格式：
+打开项目目录下的 android/app/build.gradle，视情况添加相关代码：
+
+```js
+dependencies {
+  compile 'com.facebook.fresco:animated-gif:0.11.0'  //需要GIF动画支持添加本行语句
+  compile 'com.facebook.fresco:webpsupport:0.11.0'  //需要WebP格式支持添加本行语句
+  compile 'com.facebook.fresco:animated-webp:0.11.0'  //需要WebP动画支持添加本行语句
+}
+```
 ##### 网络图片的请求参数
 
 ```js
@@ -834,10 +847,8 @@ export default class UselessTextInput extends Component {
 <Image source={{
   uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg',
   method: 'POST',
-  headers: {
-    Pragma: 'no-cache'
-  },
   body: 'Your Body goes here'}} style={{width: 400, height: 400}} />
+  //headers: {  Pragma: 'no-cache' }
 
 ```
 
@@ -854,6 +865,39 @@ export default class UselessTextInput extends Component {
   uri: 'https://facebook.github.io/react/img/logo_og.png',
   cache: 'only-if-cached'
   }} style={{width: 400, height: 400}} />
+```
+
+##### 网络图片加载监听
+对于网络图片的加载，ReactNative提供了一些属性用于图片不同加载时期的监听。
+
+- onLoadStart 图片开始加载时调用
+- onLoad
+图片加载完成时调用，此时图片加载成功
+- onLoadEnd
+加载结束后调用，与onLoad不同的是不论成功还是失败，此回调函数都会被执行。
+
+使用方法如下
+
+```js
+<Image
+   source={{uri:'https://facebook.github.io/react/img/logo_og.png'}}
+   style={[styles.base, {overflow: 'visible'}]}
+   onLoadStart={() => console.log('onLoadStart')}
+   onLoad={(event) => console.log('onLoad') }
+   onLoadEnd={() =>  console.log('onLoadEnd')}
+            />
+
+
+//对于iOS，还提供了加载进度的回调函数onProgress
+<Image
+   style={styles.image}
+   onProgress={(event) => {
+      console.log('onProgress')
+      this.setState({
+        progress: Math.round(100 * event.nativeEvent.loaded / event.nativeEvent.total)
+    })}}/>
+
+
 ```
 
 - ##### CameraRoll 
