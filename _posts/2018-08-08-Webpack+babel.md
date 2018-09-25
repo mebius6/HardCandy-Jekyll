@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "Webpack"
+date:   2018-08-08
+tags:  js 工具
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
 #### Webpack
 ##### [前端模块系统的演进](http://zhaoda.net/webpack-handbook/module-system.html)
 ##### webpack解决了现存模块打包器的两个痛点：
@@ -365,3 +374,4 @@ if (!String.prototype.padStart) {
   }
 }
 ```
+

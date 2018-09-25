@@ -1,4 +1,13 @@
-### AngularJS
+---
+layout: post
+title:  "AngularJS"
+date:   2018-08-08
+tags:  js
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
+
 #### 1.基本使用
 - ng-app 是angular的基础指令，用来指定angularjs管理的边界，也就是说：只有ng-app内部的元素才会收到angular的管理，
 类似于:Vue实例中的el配置项

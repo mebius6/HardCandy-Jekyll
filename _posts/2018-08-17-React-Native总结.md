@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "React-Native总结"
+date:   2018-08-17
+tags:  js React-Native
+description: ''
+color: 'rgb(154,133,255)'
+cover: ''
+---
 ### 1.windows-bug 启动不成功--清除andriod 残余文件
 - cd android
 - gradlew clean
@@ -216,7 +225,7 @@ Flexbox Style
 - (2)npm install antd-mobile --save
 - (3)npm install babel-plugin-import --save-dev
 - (4).babelrc中为
-```
+```json
 {
 
 “plugins”：[["import",{"libraryName":"antd-mobile"}]]，
