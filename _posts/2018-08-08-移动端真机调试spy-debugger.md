@@ -3,9 +3,9 @@ layout: post
 title:  "移动端真机调试spy-debugger"
 date:   2018-08-08
 tags:  js html
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 
 ### 1.安装

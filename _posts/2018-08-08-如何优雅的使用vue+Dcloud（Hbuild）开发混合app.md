@@ -3,9 +3,9 @@ layout: post
 title:  "如何优雅的使用vue+Dcloud（Hbuild）开发混合app"
 date:   2018-08-08
 tags:  js 工具
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 #### webpack-dev-middleware-hard-disk插件
 可以利用这个插件在运行dev的时候生成物理文件。

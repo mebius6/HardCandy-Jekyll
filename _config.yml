@@ -20,7 +20,7 @@ webtitle: '梦想的力量'
 bio: '人生苦短我用python'
 about: true
 aboutyou: '水光潋滟晴方好，山色空蒙雨亦奇。'
-portraits: '/assets/profile.jpeg' # your portraits image file path
+portraits: '/assets/user.jpg' # your portraits image file path
 
 # SNS
 SNS: false

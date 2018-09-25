@@ -3,9 +3,8 @@ layout: post
 title:  "JavaScript函数库"
 date:   2018-09-19
 tags:  js vue
-description: ''
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 
 ## 1.JavaSript中数组方法是否对原数组产生影响
@@ -15,7 +14,7 @@ cover: ''
 - push()方法可以接收任意数量的参数，把它们逐个添加到数组末尾，并返回修改后数组的长度。
 
 ##### pop
--pop()方法会删除数组最后一项，并将该项返回。
+- pop()方法会删除数组最后一项，并将该项返回。
 
 #### 队列方法
 ##### shift
@@ -27,7 +26,7 @@ cover: ''
 #### 重排序方法
 ##### reverse
 - reverse()方法可以反转数组项的顺序。
-```
+```js
 var arr = ['one', 'two', 'three'];
 arr.reverse(); 
 console.log(arr); // ['three', 'two', 'one']
@@ -36,7 +35,7 @@ console.log(arr); // ['three', 'two', 'one']
 - sort()方法会对数组进行排序。
 为了实现排序，sort()方法会调用每个数组项的toString()转型方法，然后比较得到的字符串。
 sort()方法可以接收一个比较函数作为参数。该比较函数接收两个参数，如果第一个参数应该位于第二个参数之前，则返回一个负数；反之返回正数；若两个参数相等则返回0.
-```
+```js
 // 默认排序
 var arr = ['B', 'C', 'A'];
 arr.sort();
@@ -55,7 +54,7 @@ console.log(values); // [0,1,5,10]
 - splice()方法可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素。
 - splice()方法始终都会返回一个空数组，该数组中包含从原始数组中删除的项。
 
-```
+```js
 var arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
 var arrDel = arr.splice(2, 3, 'Google', 'Facebook'); // 从索引2开始删除3个元素,然后再添加两个元素
 console.log(arr);  // ['Microsoft', 'Apple', 'Google', 'Facebook', 'Oracle']
@@ -66,7 +65,7 @@ console.log(arrDel);  // ['Yahoo', 'AOL', 'Excite']
 ##### toString、toLocaleString
 得到数组中每个值的字符串形式拼接而成的、一个以逗号分隔的字符串。
 调用toString()时，会调用数组每一项的toString()方法。而调用toLocaleString()时，会调用数组每一项的toLocaleString()方法。
-```
+```js
 var arr = ["red", "blue", "green"];
 var arrNew = arr.toString();
 console.log(arr);  // ["red", "blue", "green"]
@@ -74,15 +73,16 @@ console.log(arrNew);  // red,blue,green
 ```
 ##### valueOf
 - 在《JavaScript高级教程》中，提到调用数组的valueOf()和toString()方法会返回相同的值。而实际上并非这样，valueOf()方法会返回数组的原始值。
-
+```js
 var arr = ["red", "blue", "green"];
 var arrNew = arr.valueOf();
 console.log(arr);  // ["red", "blue", "green"]
 console.log(arrNew);  // ["red", "blue", "green"]
+```
 ##### join
 - join()方法使用指定的分隔符，将数组的每个元素连接起来，返回构建的字符串。
 使用join()重现toString()方法的输出：arr.join(',')
-```
+```js
 var arr = ["red", "blue", "green"];
 var arrNew = arr.join(',');
 console.log(arr);  // ["red", "blue", "green"]
@@ -93,7 +93,7 @@ console.log(arrNew);  // red,blue,green
 - concat()方法可以基于当前数组中的所有项创建一个新数组。
 具体来说，concat()方法会先创建当前数组的一个副本，然后将接收的参数添加到这个副本的末尾，最后返回新构建的数组。
 如果没有给concat()方法传递参数，只是复制当前数组并返回副本。如果给concat()方法传递一个或多个数组，则会将数组的每一项都添加到结果数组中。
-```
+```js
 var arr = ['A', 'B', 'C'];
 var arrNew = arr.concat(1, 2, [3, 4]);
 console.log(arr);  // ['A', 'B', 'C']
@@ -102,7 +102,7 @@ console.log(arrNew);  // ['A', 'B', 'C', 1, 2, 3, 4]
 ##### slice
 - slice()方法可以基于当前数组中的一项或多项创建一个新数组。
 slice()方法可以接收一或两个参数，即要返回项的起始和结束位置，但不包括结束位置。如果只有一个参数，slice()方法返回起始位置到数组末尾的所有项。如果参数为负数，则用数组长度+该参数来确定相应的位置。
-```
+```js
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 arr.slice(0, 3); // 从索引0开始，到索引3结束，但不包括索引3: ['A', 'B', 'C']
 console.log(arr); // ["A", "B", "C", "D", "E", "F", "G"]
@@ -112,7 +112,7 @@ ES5中定义了2中数组位置方法。每个方法接收两个参数：要查�
 
 ##### indexOf
 - indexOf()方法可以搜索一个指定元素的位置，返回该项在数组中的位置。如果没找到，则返回-1。indexOf()是从数组的开头开始向后查找。
-```
+```js
 var arr = [10, 20, '30', 'xyz', 20];
 var pos = arr.indexOf(20);
 console.log(arr);  // [10, 20, "30", "xyz", 20]
@@ -130,7 +130,7 @@ ES5中定义了5种数组迭代方法。每个方法都接收两个参数：要�
 
 ##### forEach
 - 对数组中的每一项运行给定函数。forEach()方法没有返回值。
-```
+```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var eachResult = arr.forEach(function(item, index, self) {
     return item += 2;
@@ -140,7 +140,7 @@ console.log(eachResult);  // undefined
 ```
 ##### map
 - 对数组中的每一项运行给定函数。 map()方法返回每次函数调用的结果组成的数组。
-```
+```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var mapResult = arr.map(function(item, index, self) {
     return item * 2;
@@ -150,7 +150,7 @@ console.log(mapResult);  // [2, 4, 6, 8, 10, 8, 6, 4, 2]
 ```
 ##### filter
 - 对数组中的每一项运行给定函数。filter()方法返回使给定函数返回true的项组成的数组。
-```
+```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var filterResult = arr.filter(function(item, index, self) {
     return item > 2;
@@ -160,7 +160,7 @@ console.log(filterResult);  // [3, 4, 5, 4, 3]
 ```
 ##### every
 - 对数组中的每一项运行给定函数。every()方法会返回布尔值，如果给定函数对数组每一项都返回true，则返回true。
-```
+```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var everyResult = arr.every(function(item, index, self) {
     return item > 2;
@@ -170,7 +170,7 @@ console.log(everyResult);  // false
 ```
 ##### some
 - 对数组中的每一项运行给定函数。some()方法会返回布尔值，如果给定函数对数组任意一项返回true，则返回true。
-```
+```js
 var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 var someResult = arr.some(function(item, index, self) {
     return item > 2;
@@ -183,7 +183,7 @@ ES5中定义了2种数组缩小方法。每个方法都接收两个参数：在�
 
 ##### reduce
 - reduce()方法会迭代数组中的所有项，然后构建一个最终返回值。reduce()方法从数组的第一项开始，逐个遍历到最后。
-```
+```js
 var arr = [1, 2, 3, 4, 5];
 var reduceResult = arr.reduce(function(prev, cur, index, self) {
     return prev + cur;
@@ -193,7 +193,7 @@ console.log(reduceResult);  // 15
 ```
 ##### reduceRight
 - reduceRight()方法与reduce()方法类似，区别在于：reduceRight()从数组的最后一项开始，向前遍历到第一项。
-```
+```js
 var arr = [1, 2, 3, 4, 5];
 var rightResult = arr.reduceRight(function(prev, cur, index, self) {
     return prev + cur;
@@ -203,7 +203,7 @@ console.log(rightResult);  // 15
 ```
 ##   2.字符串操作
 ###    2-1去除字符串空格
-
+```js
     //去除空格  type 1-所有空格  2-前后空格  3-前空格 4-后空格
     //ecDo.trim('  1235asd',1)
     //result：1235asd
@@ -223,7 +223,7 @@ console.log(rightResult);  // 15
                 return str;
         }
     }
-    
+```   
 ###     2-2字母大小写切换
 -    
     /*type
@@ -233,7 +233,7 @@ console.log(rightResult);  // 15
      4：全部大写
      5：全部小写
      */
-```
+```js
     //ecDo.changeCase('asdasd',1)
     //result：Asdasd
     changeCase: function (str, type) {
@@ -272,7 +272,7 @@ console.log(rightResult);  // 15
     }
 ```    
 ###    2-3字符串循环复制
-  
+```js  
             //repeatStr(str->字符串, count->次数)
             //ecDo.repeatStr('123',3)
             //"result：123123123"
@@ -284,20 +284,20 @@ console.log(rightResult);  // 15
                 }
                 return text;
             }
-    
+```    
 ###    2-4字符串替换
-s  
+```js 
         //ecDo.replaceAll('这里是上海，中国第三大城市，广东省省会，简称穗，','上海','广州')
 
         //result："这里是广州，中国第三大城市，广东省省会，简称穗，"
- ```   
+ 
         replaceAll: function (str, AFindText, ARepText) {
             raRegExp = new RegExp(AFindText, "g");
             return str.replace(raRegExp, ARepText);
         }
 ```    
 ### 2-5替换
-
+```js 
             //字符替换*
             //replaceStr(字符串,字符格式, 替换方式,替换的字符（默认*）)
             //ecDo.replaceStr('18819322663',[3,5,3],0)
@@ -340,9 +340,9 @@ s
                     return str.replace(Reg, replaceCount)
                 }
             }
-    
+```   
 ### 2-6检测字符串
--    
+```js   
         //检测字符串
         //ecDo.checkType('165226226326','phone')
         //result：false
@@ -371,9 +371,9 @@ s
                     return true;
             }
         }
-        
+```        
 ### 2-7 检测密码强度
-   
+```js   
     //ecDo.checkPwd('12asdASAD')
     //result：3(强度等级为3)
     checkPwd: function (str) {
@@ -395,9 +395,9 @@ s
         }
         return nowLv;
     }
-    
+```    
 ### 2-8随机码（toString详解）
-   
+```js    
     //count取值范围0-36
     //ecDo.randomWord(10)
     //result："2584316588472575"
@@ -408,25 +408,27 @@ s
     randomWord: function (count) {
         return Math.random().toString(count).substring(2);
     }
-    
+```    
 ### 2-9查找字符串
     可能标题会有点误导，下面我就简单说明一个需求，
     在字符串'sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967'
     中找出'blog'的出现次数。代码如下
+```js 
     //var strTest='sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967'
     //ecDo.countStr(strTest,'blog')
     //result：6
     countStr: function (str, strSplit) {
         return str.split(strSplit).length - 1
     }
-### 2-9 去掉两边
 ```
+### 2-9 去掉两边
+```js
 var str = 'abcd';
 str.replace(/(^.)|(.$)/g, '')
 "bc"
 ```
 ### 2-10 过滤字符串 
-
+```js 
     //过滤字符串(html标签，表情，特殊字符)
     //字符串，替换内容（special-特殊字符,html-html标签,emjoy-emjoy表情,word-小写字母，WORD-大写字母，number-数字,chinese-中文），要替换成什么，默认'',保留哪些特殊字符
     //如果需要过滤多种字符，type参数使用,分割，如下栗子
@@ -485,8 +487,9 @@ str.replace(/(^.)|(.$)/g, '')
         }
         return _str;
     }
-    
+```    
 ###  2-11格式化处理字符串
+```js 
     //ecDo.formatText('1234asda567asd890')
     //result："12,34a,sda,567,asd,890"
     //ecDo.formatText('1234asda567asd890',4,' ')
@@ -499,8 +502,9 @@ str.replace(/(^.)|(.$)/g, '')
         var reg = new RegExp(regText, 'g');
         return str.replace(reg, _delimiter);
     }
-    
+```    
 ### 2-12找出最长单词
+```js 
     //ecDo.longestWord('Find the Longest word in a String')
     //result：7
     //ecDo.longestWord('Find|the|Longest|word|in|a|String','|')
@@ -517,8 +521,9 @@ str.replace(/(^.)|(.$)/g, '')
         })
         return {el:_item,max:_max};
     }
-    
+```    
 ### 2-13句中单词首字母大写 
+```js 
     //这个我也一直在纠结，英文标题，即使是首字母大写，也未必每一个单词的首字母都是大写的，但是又不知道哪些应该大写，哪些不应该大写
     //ecDo.titleCaseUp('this is a title')
     //"This Is A Title"
@@ -531,11 +536,11 @@ str.replace(/(^.)|(.$)/g, '')
         })
         return this.trim(result, 4)
     }  
-    
+```    
 ## 3.数组操作
 ### 3-1数组去重
 #### 3-1-1利用ES6 Set去重（ES6中最常用）
-```
+```js
      function  unique(arr) {
         return  Array.from(new Set(arr))
     }
@@ -547,7 +552,7 @@ str.replace(/(^.)|(.$)/g, '')
 ```
 ##### 不考虑兼容性，这种去重的方法代码最少。这种方法还无法去掉“{}”空对象，后面的高阶方法会添加去掉“{}”空对象。
 #### 3-1-2利用for嵌套for，然后splice去重（ES5中最常用）
-```
+```js
 function unique(arr) {
   for (var i = 0; i < arr.length; i++) {
     for (var j = i + 1; j < arr.length; j++) {
@@ -594,7 +599,7 @@ console.log(unique(arr));
 ```
 ##### 双层循环，外层循环元素，内层循环时比较值。值相同时，则删去这个值。
 #### 3-1-3利用indexOf去重
-```
+```js
 function unique(arr) {
   if (!Array.isArray(arr)) {
     console.log("type error!");
@@ -616,7 +621,7 @@ function unique(arr) {
 ```
 ##### 新建一个空的结果数组，for 循环原数组，判断结果数组是否存在当前元素，如果有相同的值则跳过，不相同则push进数组。
 #### 3-1-4利用sort()
-```
+```js
 function unique(arr) {
   if (!Array.isArray(arr)) {
     console.log("type error!");
@@ -639,7 +644,7 @@ function unique(arr) {
 ```
 ##### 利用sort()排序方法，然后根据排序后的结果进行遍历及相邻元素比对。
 #### 3-1-5利用对象的属性不能相同的特点进行去重
-```
+```js
 function unique(arr) {
   if (!Array.isArray(arr)) {
     console.log("type error!");
@@ -665,7 +670,7 @@ function unique(arr) {
 }
 ```
 #### 3-1-6利用includes
-```
+```js
 function unique(arr) {
   if (!Array.isArray(arr)) {
     console.log("type error!");
@@ -684,7 +689,7 @@ function unique(arr) {
 }
 ```
 #### 3-1-7利用hasOwnProperty
-```
+```js
 function unique(arr) {
   var obj = {};
 
@@ -697,7 +702,7 @@ function unique(arr) {
 ```
 ##### 利用hasOwnProperty 判断是否存在对象属性。
 #### 3-1-8利用filter
-```
+```js
 function unique(arr) {
   return;
   arr.filter(function(item, index, arr) {
@@ -709,7 +714,7 @@ function unique(arr) {
 }
 ```
 #### 3-1-9利用递归去重
-```
+```js
 function unique(arr) {
   var arrry = arr;
 
@@ -735,7 +740,7 @@ function unique(arr) {
 }
 ```
 #### 3-1-10利用Map数据结构去重
-```
+```js
 function arrayNonRepeatfy(arr) {
   let map = new Map();
 
@@ -758,7 +763,7 @@ function arrayNonRepeatfy(arr) {
 }
 ```
 #### 3-1-11利用reduce
-```
+```js
 Array.prototype.unique = function() {
   var sortArr = this.sort();
 
@@ -778,7 +783,7 @@ Array.prototype.unique = function() {
 ##### 创建一个空Map数据结构，遍历需要去重的数组，把数组的每一个元素作为key存到Map中。由于Map中不会出现相同的key值，所以最终得到的就是去重后的结果。
 #### 3-1-11利用reduce
 ### 3-2数组顺序打乱
-```
+```js
         upsetArr: function (arr) {
             return arr.sort(function () {
                 return Math.random() - 0.5
@@ -786,7 +791,7 @@ Array.prototype.unique = function() {
         },
 ```
 ### 3-3数组最大值最小值
-```  
+```js 
     //数组最大值
       maxArr: function (arr) {
             return Math.max.apply(null, arr);
@@ -798,7 +803,7 @@ Array.prototype.unique = function() {
 ```
  
 ### 3-4数组求和，平均值
-```
+```js
      //这一块的封装，主要是针对数字类型的数组
         //求和
         sumArr: function (arr) {
@@ -812,7 +817,7 @@ Array.prototype.unique = function() {
         },
 ```
 ### 3-5从数组中随机获取元素
-```
+```js
         //ecDo.randomOne([1,2,3,6,8,5,4,2,6])
         //2
         //ecDo.randomOne([1,2,3,6,8,5,4,2,6])
@@ -826,7 +831,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-6返回数组（字符串）一个元素出现的次数
-```
+```js
         //ecDo.getEleCount('asd56+asdasdwqe','a')
         //result：3
         //ecDo.getEleCount([1,2,3,4,5,66,77,22,55,22],22)
@@ -842,7 +847,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-7返回数组（字符串）出现最多的几次元素和出现次数 ###
-```
+```js
         //arr, rank->长度，默认为数组长度，ranktype，排序方式，默认降序
         //返回值：el->元素，count->次数
         //ecDo.getCount([1,2,3,1,2,5,2,4,1,2,6,2,1,3,2])
@@ -886,7 +891,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-8得到n1-n2下标的数组
-```
+```js
         //ecDo.getArrayNum([0,1,2,3,4,5,6,7,8,9],5,9)
         //result：[5, 6, 7, 8, 9]
         //getArrayNum([0,1,2,3,4,5,6,7,8,9],2) //不传第二个参数,默认返回从n1到数组结束的元素
@@ -896,7 +901,7 @@ Array.prototype.unique = function() {
         }
 ``` 
 ### 3-9筛选数组
-```
+```js
         //删除值为'val'的数组元素
         //ecDo.removeArrayForValue(['test','test1','test2','test','aaa'],'test',')
         //result：["aaa"]   带有'test'的都删除
@@ -909,7 +914,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-10 获取对象数组某些项
-```
+```js
         //var arr=[{a:1,b:2,c:9},{a:2,b:3,c:5},{a:5,b:9},{a:4,b:2,c:5},{a:4,b:5,c:7}]
         //ecDo.getOptionArray(arr,'a,c')
         //result：[{a:1,c:9},{a:2,c:5},{a:5,c:underfind},{a:4,c:5},{a:4,c:7}]
@@ -939,7 +944,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-11 排除对象数组某些项 
-```
+```js
         //var arr=[{a:1,b:2,c:9},{a:2,b:3,c:5},{a:5,b:9},{a:4,b:2,c:5},{a:4,b:5,c:7}]
         //ecDo.filterOptionArray(arr,'a')
         //result：[{b:2,c:9},{b:3,c:5},{b:9},{b:2,c:5},{b:5,c:7}]
@@ -962,7 +967,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-12 对象数组排序
-```
+```js
         //var arr=[{a:1,b:2,c:9},{a:2,b:3,c:5},{a:5,b:9},{a:4,b:2,c:5},{a:4,b:5,c:7}]
         //ecDo.arraySort(arr,'a,b')a是第一排序条件，b是第二排序条件
         //result：[{"a":1,"b":2,"c":9},{"a":2,"b":3,"c":5},{"a":4,"b":2,"c":5},{"a":4,"b":5,"c":7},{"a":5,"b":9}]
@@ -980,7 +985,7 @@ Array.prototype.unique = function() {
         }
 ```
 ###   3-13 数组扁平化
-```
+```js
         //ecDo.steamroller([1,2,[4,5,[1,23]]])
         //[1, 2, 4, 5, 1, 23]
         steamroller: function (arr) {
@@ -999,7 +1004,7 @@ Array.prototype.unique = function() {
         }
 ```
 ### 3-14 数组对象去重指定key
-```
+```js
           //过滤数组对象中重复的key项
           //将对象元素转换成字符串以作比较  
           function obj2key(obj, keys) {
@@ -1028,7 +1033,7 @@ Array.prototype.unique = function() {
           uniqeByKeys(arr,["a"]);//[{a:1,b:2,c:3},{a:11,b:22,c:11}]
 ```
 ### 3-15 数组对象按指定key分组
-```
+```js
 function getGroupbyId(arr,name){
     var map = {},
     dest = [];
@@ -1056,7 +1061,7 @@ function getGroupbyId(arr,name){
 ```
 ## 4.基础DOM操作
 这个部分代码其实参考jquery的一些函数写法，唯一区别就是调用不用，参数一样.比如下面的栗子
-```
+```js
         //设置对象内容
         jquery：$('#xxx').html('hello world');
         现在：ecDo.html(document.getElementById('xxx'),'hello world')
@@ -1065,7 +1070,7 @@ function getGroupbyId(arr,name){
         现在：ecDo.html(document.getElementById('xxx'))
 ```
 ### 4-1检测对象是否有哪个类名
-```
+```js
         //检测对象是否有哪个类名
         hasClass: function (obj, classStr) {
             if (obj.className && this.trim(obj.className, 1) !== "") {
@@ -1078,9 +1083,9 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 4-2 添加类名
-```
-            addClass: function (obj, classStr) {
-                if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length >= 1) {
+```js
+        function addClass (obj, classStr) {
+            if ((this.istype(obj, 'array') ||this.istype(obj, 'elements')) && obj.length >= 1) {
                     for (var i = 0, len = obj.length; i < len; i++) {
                         if (!this.hasClass(obj[i], classStr)) {
                             obj[i].className += " " + classStr;
@@ -1095,8 +1100,8 @@ function getGroupbyId(arr,name){
             }
 ```
 ### 4-3删除类名
-  ```
-        removeClass: function (obj, classStr) {
+```js
+        function removeClass (obj, classStr) {
             if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length > 1) {
                 for (var i = 0, len = obj.length; i < len; i++) {
                     if (this.hasClass(obj[i], classStr)) {
@@ -1114,14 +1119,14 @@ function getGroupbyId(arr,name){
         }
  ```
 ###  4-4替换类名("被替换的类名","替换的类名")
-```
+```jsx
         replaceClass: function (obj, newName, oldName) {
             this.removeClass(obj, oldName);
             this.addClass(obj, newName);
         }
 ```
 ### 4-5获取兄弟节点
-```
+```js
         //ecDo.siblings(obj,'#id')
         siblings: function (obj, opt) {
             var a = []; //定义一个数组，用来存o的兄弟元素
@@ -1164,7 +1169,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 4-6设置样式
-```
+```js
         css: function (obj, json) {
             for (var attr in json) {
                 obj.style[attr] = json[attr];
@@ -1172,7 +1177,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 4-7设置文本内容
-```
+```jsx
         html: function (obj) {
             if (arguments.length === 1) {
                 return obj.innerHTML;
@@ -1189,7 +1194,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 4-8显示隐藏
-```
+```jsx
         show: function (obj) {
             var blockArr=['div','li','ul','ol','dl','table','article','h1','h2','h3','h4','h5','h6','p','hr','header','footer','details','summary','section','aside','']
             if(blockArr.indexOf(obj.tagName.toLocaleLowerCase())===-1){
@@ -1205,7 +1210,7 @@ function getGroupbyId(arr,name){
 ```
 ## 5.其他操作
 ### 5-1cookie
-```
+```js
         //cookie
         //设置cookie
         setCookie: function (name, value, iDay) {
@@ -1230,7 +1235,7 @@ function getGroupbyId(arr,name){
         },
 ```
 ### 5-2清除对象中值为空的属性
-```
+```js
         //ecDo.filterParams({a:"",b:null,c:"010",d:123})
         //Object {c: "010", d: 123}
         filterParams: function (obj) {
@@ -1244,7 +1249,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-3现金额大写转换函数
-```
+```js
         //ecDo.upDigit(168752632)
         //result："人民币壹亿陆仟捌佰柒拾伍万贰仟陆佰叁拾贰元整"
         //ecDo.upDigit(1682)
@@ -1279,7 +1284,7 @@ function getGroupbyId(arr,name){
         } 
 ``` 
 ### 5-4获取，设置url参数
-```
+```js
         //设置url参数
         //ecDo.setUrlPrmt({'a':1,'b':2})
         //result：a=1&b=2
@@ -1313,7 +1318,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-5随机返回一个范围的数字
-```
+```js
         //ecDo.randomNumber(5,10)
         //返回5-10的随机整数，包括5，10
         //ecDo.randomNumber(10)
@@ -1333,7 +1338,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-6随进产生颜色
-```
+```js
         randomColor: function () {
             //randomNumber是下面定义的函数
             //写法1
@@ -1351,7 +1356,7 @@ function getGroupbyId(arr,name){
         //Math.floor(Math.random()*0xffffff).toString(16);
 ```
 ### 5-7Date日期时间部分
-```
+```js
         //到某一个时间的倒计时
         //ecDo.getEndTime('2017/7/22 16:0:0')
         //result："剩余时间6天 2小时 28 分钟20 秒"
@@ -1375,7 +1380,7 @@ function getGroupbyId(arr,name){
 ### 5-8适配rem
     这个适配的方法很多，我就写我自己用的方法。大家也可以去我回答过得一个问题那里看更详细的说明！移动端适配问题
 #### 方法一
-```
+```js
             getFontSize: function (_client) {
                 var doc = document,
                     win = window;
@@ -1408,7 +1413,7 @@ function getGroupbyId(arr,name){
             //比如在iphone6(屏幕宽度：375)上，375/750*100=50px;就是1rem=50px;图片显示就是宽高都是50px;
 ```
 #### 方法二、
-```
+```js
             // 1 获取屏幕的宽度
             //
             // 2 设置设计图的初始大小
@@ -1452,7 +1457,7 @@ function getGroupbyId(arr,name){
             }
 ```
 ### 5-9ajax
-```
+```js
             /* 封装ajax函数
              * @param {string}obj.type http连接的方式，包括POST和GET两种方式
              * @param {string}obj.url 发送请求的url
@@ -1510,7 +1515,7 @@ function getGroupbyId(arr,name){
             }
 ```
 ### 5-10图片懒加载
-```
+```js
         //图片没加载出来时用一张图片代替
         aftLoadImg: function (obj, url, errorUrl,cb) {
             var oImg = new Image(), _this = this;
@@ -1583,7 +1588,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-11关键词加标签
-```
+```js
         //这两个函数多用于搜索的时候，关键词高亮
         //创建正则字符
         //ecDo.createKeyExp([前端，过来])
@@ -1620,7 +1625,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-12数据类型判断
-```
+```js
         //ecDo.istype([],'array')
         //true
         //ecDo.istype([])
@@ -1656,7 +1661,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-13手机类型判断
-```
+```js
         browserInfo: function (type) {
             switch (type) {
                 case 'android':
@@ -1673,7 +1678,7 @@ function getGroupbyId(arr,name){
         }
 ```
 ### 5-14函数节流
-```
+```js
         //多用于鼠标滚动，移动，窗口大小改变等高频率触发事件
         // var count=0;
         // function fn1(){
@@ -1709,7 +1714,7 @@ function getGroupbyId(arr,name){
 ```
 
 ### 5-15获取地址栏参数
-```
+```js
                 var tools = {
             //获取参数列表
             getParamObj: function() {

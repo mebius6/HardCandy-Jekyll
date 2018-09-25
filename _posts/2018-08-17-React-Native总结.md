@@ -3,9 +3,9 @@ layout: post
 title:  "React-Native总结"
 date:   2018-08-17
 tags:  js react-native 
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 ### 1.windows-bug 启动不成功--清除andriod 残余文件
 - cd android

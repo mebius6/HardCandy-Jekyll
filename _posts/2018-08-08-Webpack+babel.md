@@ -3,9 +3,9 @@ layout: post
 title:  "Webpack"
 date:   2018-08-08
 tags:  js 工具
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 #### Webpack
 ##### [前端模块系统的演进](http://zhaoda.net/webpack-handbook/module-system.html)
@@ -51,7 +51,7 @@ cover: ''
 - 3 运行webpack src/js/main.js dist/bundle.js进行打包构建，语法是：webpack 入口文件 输出文件
 - 4 注意：需要在页面中引入 输出文件 的路径（此步骤可通过配置webpack去掉）
 ##### 配置文件方式（推荐）
-```
+```js
 /*
   webpack.config.js
 
@@ -81,7 +81,7 @@ module.exports = {
 - 注意：无法直接在终端中执行 webpack-dev-server，需要通过 package.json 的 scripts 实现
 - 使用方式：npm run dev
 
-```
+```js
 "scripts": {
   "dev": "webpack-dev-server"
 }
@@ -99,7 +99,7 @@ module.exports = {
 - --open ：自动打开浏览器
 - --port ：端口号
 - --hot ：热更新，只加载修改的文件(按需加载修改的内容)，而非全部加载
-```
+```js
     /* package.json */
     /* 运行命令：npm run dev */
     
@@ -111,7 +111,7 @@ module.exports = {
 ```
 ##### 配置说明 - webpack.config.js
 
-```
+```js
 const webpack = require('webpack')
 
 devServer: {
@@ -137,7 +137,7 @@ plugins: [
 - 安装：npm i -D html-webpack-plugin
 - 作用：根据模板，自动生成html页面
 - 优势：页面存储在内存中，自动引入bundle.js、css等文件
-```
+```js
 /* webpack.config.js */
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -165,7 +165,7 @@ plugins: [
 ###### 使用webpack打包CSS
 - 安装：npm i -D style-loader css-loader
 - 注意：use中模块的顺序不能颠倒，加载顺序：从右向左加载
-```
+```js
 /* index.js */
 
 // 导入 css 文件
@@ -188,7 +188,7 @@ module: {
 - 安装：npm i -D sass-loader node-sass
 - 注意：sass-loader 依赖于 node-sass 模块
 
-```
+```js
 /* webpack.config.js */
 
 // 参考：https://webpack.js.org/loaders/sass-loader/#examples
@@ -207,7 +207,7 @@ module:{
 - 安装：npm i -D url-loader file-loader
 - file-loader：加载并重命名文件（图片、字体 等）
 - url-loader：将图片或字体转化为base64编码格式的字符串，嵌入到样式文件中
-```
+```js
     /* webpack.config.js */
     
     module: {
@@ -226,7 +226,7 @@ module:{
   - 当图片文件大小（字节）大于等于指定的limit时，图片被重命名以url路径形式加载（此时，需要file-loader来加载图片）
 - 图片文件重命名，保证相同文件不会被加载多次。例如：一张图片（a.jpg）拷贝一个副本（b.jpg），同时引入这两张图片，重命名后只会加载一次，因为这两张图片就是同一张
 - 文件重命名以后，会通过MD5加密的方式，来计算这个文件的名称
-```
+```js
 /* webpack.config.js */
 
 module: {
@@ -263,7 +263,7 @@ module: {
 - 安装：npm i -D babel-preset-env
 ##### 基本使用（两步）
 - ###### 第一步：
-```
+```js
 /* webpack.config.js */
 
 module: {
@@ -275,7 +275,7 @@ module: {
 ```
 
 - ###### 第二步：在项目根目录中新建.babelrc配置文件
-```
+```js
 /* .babelrc */
 
 // 将来babel-loader运行的时候，会检查这个配置文件，并读取相关的语法和插件配置
@@ -298,7 +298,7 @@ module: {
 - ES2015 也就是 ES6, 下一个版本是ES7, 从 ES6 到 ES7之间经历了 5 个阶段
 - babel-preset-es2015 转换es6的语法
 - babel-preset-stage-0 转换比es6更新的语法
-```
+```js
 Stage 0 - Strawman（展示阶段）
 Stage 1 - Proposal（征求意见阶段）
 Stage 2 - Draft（草案阶段）
@@ -321,25 +321,27 @@ stage 4 is "now it's javascript".
     - 方式二：npm i -D babel-plugin-transform-runtime 和 npm i -S babel-runtime
   - 注意：babel-runtime包中的代码会被打包到你的代码中（-S）
 
-```
+
 区别：
 polyfill 所有兼容性问题，都可以通过polyfill解决（包括：实例方法）、污染全局环境
+
 runtime  除了实例方法以外，其他兼容新问题都能解决、不污染全局环境
 
-polyfill：如果想要支持全局对象（比如：`Promise`）、静态方法（比如：`Object.assign`）或者**实例方法**（比如：`String.prototype.padStart`）等，那么就需要使用`babel-polyfill`
+- polyfill：如果想要支持全局对象（比如：`Promise`）、静态方法（比如：`Object.assign`）或者**实例方法**（比如：`String.prototype.padStart`）等，那么就需要使用`babel-polyfill`
 
-babel-runtime ：提供了兼容旧环境的函数，使用的时候，需要我们自己手动引入
+- babel-runtime ：提供了兼容旧环境的函数，使用的时候，需要我们自己手动引入
   比如： const Promise = require('babel-runtime/core-js/promise')
   存在的问题：
-    1 手动引入太繁琐
-    2 多个文件引入同一个helper（定义），造成代码重复，增加代码体积
-babel-plugin-transform-runtime：
-    1 自动引入helper（比如，上面引入的 Promise）
-    2 babel-runtime提供helper定义，引入这个helper即可使用，避免重复
-    3 依赖于 babel-runtime 插件
+    - 1 手动引入太繁琐
+    - 2 多个文件引入同一个helper（定义），造成代码重复，增加代码体积
+- babel-plugin-transform-runtime：
+    - 1 自动引入helper（比如，上面引入的 Promise）
+    - 2 babel-runtime提供helper定义，引入这个helper即可使用，避免重复
+    - 3 依赖于 babel-runtime 插件
 
-transform-runtime插件的使用：
+- transform-runtime插件的使用：
   直接在 .bablerc 文件中，添加一个 plugins 的配置项即可！！！
+```js
   "plugins": [
     "transform-runtime"
   ]
@@ -366,7 +368,7 @@ module.exports = {
 -  babel-loader 用来解析js文件
 -  babel-preset-* 新ES语法的解析和转换
 -  transform-runtime / babel-polyfill 兼容旧浏览器，到达支持新API目的
-```
+```js
 // 判断浏览器是否兼容 padStart 这个 API
 if (!String.prototype.padStart) {
   // 如果不兼容, 就自己模拟 padStart的功能实现一份

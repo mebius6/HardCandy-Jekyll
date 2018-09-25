@@ -3,9 +3,9 @@ layout: post
 title:  "AngularJS"
 date:   2018-08-08
 tags:  js
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 
 #### 1.基本使用
@@ -15,7 +15,7 @@ cover: ''
 **注意:angular找到第一个ng-app以后，就不再解析后续的ng-app，所以，默认情况下，只有第一个ng-app会生效**
 
 如果要在一个页面中启动多个 ng-app，后面的需要通过手动启动的方式来启动（但是，一般不会有这种情况出现！！！）
-```
+```html
   <!-- 第一种启动方式：使用ng-app启动 -->
   <div ng-app="myApp" ng-controller="myCtrl"></div>
 
@@ -72,7 +72,7 @@ cover: ''
 
 - 推断式创建控制器，那么angular是根据回调函数形参的名称来找服务的，
 - .controller("myCtrl",function($scope){}   **$scope形参不可变** ，如果代码压缩程序会报错
-```
+```html
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- ng-model 也是一个指令，用来实现文本框数据的双向绑定，类似于：Vue中的 v-model -->
     <input type="text" ng-model="msg">
@@ -90,7 +90,7 @@ cover: ''
 **注入式写法**
 - 如果使用的是注入式语法创建控制器，那么angular是根据数组中的字符串参数来找服务的
 - .controller("myCtrl",['$scope',function(**$scope**){}]} **$scope**形参可变，代码压缩后也不会影响代码运行
-```
+```html
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- ng-model 也是一个指令，用来实现文本框数据的双向绑定，类似于：Vue中的 v-model -->
     <input type="text" ng-model="msg">
@@ -215,7 +215,7 @@ cover: ''
 ```
 ##### ng-bind-html
 - angular中的指令-ngSanitize模块展示html内容
-```
+```html
 <div ng-app="myApp" ng-controller="myController">
     <!-- <h1 ng-bind="msg"></h1> -->
 
@@ -294,7 +294,7 @@ cover: ''
 ```
 如果遍历的数组中包含了相同的内容（比如：ccc 出现了两次），此时页面将渲染不出内容内容，需要通过 track by 表达式来指定唯一的key，就可以解决这个问题了
 
-```
+```html
   <div ng-app="myApp" ng-controller="myController">
     <ul>
       <!-- 如果遍历的数组中包含了相同的内容（比如：ccc 出现了两次），此时，需要通过 track by 表达式来指定唯一的key，就可以解决这个问题了 -->
@@ -351,7 +351,7 @@ cover: ''
 ##### ng-class设置类
 -  ng-class 的值是一个对象，对象的键表示要添加的类名称，值是一个布尔值，如果值为true，表示添加这个类；否则，不添加这个类
 
-```
+```html
   <div ng-app="myApp" ng-controller="myController">
 
     <!-- ng-class 的值是一个对象，对象的键表示要添加的类名称，值是一个布尔值，如果值为true，表示添加这个类；否则，不添加这个类 -->
@@ -370,7 +370,7 @@ cover: ''
 ```
 ##### ng-if/ng-show
 
-```
+```html
   <div ng-app="myApp" ng-controller="myController">
     <!-- <p ng-if="isShow">你能看到我吗？？</p> -->
 
@@ -398,7 +398,7 @@ cover: ''
 ```
 ##### ng-switch 实现元素的展示和隐藏控制
 
-```
+```html
   <div ng-app="myApp" ng-controller="myController">
     <input type="text" ng-model="name">
 
@@ -427,7 +427,7 @@ cover: ''
 -  第一个参数：表示要监视的数据
 -  第二个参数：是一个回调函数，如果监视到数据变化了，这个回调函数就会执行
 
-```
+```html
 <body ng-app="myApp" ng-controller="myCtrl">
   <input type="text" ng-model="num">
   <input type="text" ng-model="user.name">
@@ -474,7 +474,7 @@ cover: ''
 ###### 过滤器
 - 用来对数据进行格式化，也就是让数据按照某个格式输出
 
-```
+```js
 .filter('myDate', function () {
 
         return function (input, format, arg2) {
@@ -488,7 +488,7 @@ cover: ''
 - 2 angular中没有组件化开发，但是，可以通过 自定义指令 来模拟组件化开发
 总结发现：angular中的自定义与Vue中的组件语法几乎一样，功能也很相近
 
-```
+```js
   .directive('myBtn', function () {
 
         return {
@@ -522,7 +522,7 @@ cover: ''
       - 2 如果多个控制器中使用了服务，angular只会在第一次使用的时候，创建服务的实例对象并且注入到控制器中（缓存）
       - 3 控制器中如果没有注入服务，那么服务中代码是不会执行的
       
-```
+```js
       .service('myService', function () {
         this.say = function () {}
       })

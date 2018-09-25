@@ -3,9 +3,9 @@ layout: post
 title:  "react-native开源项目"
 date:   2018-08-08
 tags:  js react-native 
-description: ''
+
 color: 'rgb(154,133,255)'
-cover: ''
+
 ---
 
 <table>
