@@ -2,7 +2,7 @@
 layout: post
 title:  "React-Native总结"
 date:   2018-08-17
-tags:  js React-Native
+tags:  js react-native 
 description: ''
 color: 'rgb(154,133,255)'
 cover: ''
