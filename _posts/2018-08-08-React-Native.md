@@ -831,15 +831,14 @@ export default class UselessTextInput extends Component {
 ```js
 
 //可以在Image组件的source属性中指定一些请求参数
-// <Image source={{
-//   uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg',
-//   method: 'POST',
-//   headers: {
-//     Pragma: 'no-cache'
-//   },
-//   body: 'Your Body goes here'
-// }}
-// style={{width: 400, height: 400}} />
+<Image source={{
+  uri:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656881601,2258550211&fm=23&gp=0.jpg',
+  method: 'POST',
+  headers: {
+    Pragma: 'no-cache'
+  },
+  body: 'Your Body goes here'
+}} style={{width: 400, height: 400}} />
 
 ```
 
@@ -855,8 +854,7 @@ export default class UselessTextInput extends Component {
 <Image source={{
   uri: 'https://facebook.github.io/react/img/logo_og.png',
   cache: 'only-if-cached'
-  }}
-  style={{width: 400, height: 400}} />
+  }} style={{width: 400, height: 400}} />
 ```
 
 - ##### CameraRoll 
