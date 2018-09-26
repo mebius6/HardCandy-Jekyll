@@ -17,21 +17,21 @@
 <!-- <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Pacifico|Ubuntu|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> -->
 
 <!-- Favicon -->
-<link href="/assets/profile.jpeg" rel="shortcut icon" />
-<link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
+<link href="/assets/user.jpg" rel="shortcut icon" />
+<link href="/assets/user.jpg" rel="apple-touch-icon-precomposed" />
 <!-- Android Lolipop Theme Color -->
 <!-- <meta name="theme-color" content="#1464FB"> -->
 <title>{{ page.title }}</title>
 <!-- 百度统计 -->
 {% if site.baidu %}
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu-url }}";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu-url }}";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
 </script>
 {% endif %}
 <!-- 谷歌分析 -->
@@ -40,7 +40,7 @@ var _hmt = _hmt || [];
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ google-ID }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', '{{ google-ID }}');
