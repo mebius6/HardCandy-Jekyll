@@ -8,6 +8,8 @@ html{
     /*background-size: 100%;*/
     background-image:url('/assets/bg1.gif');
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     /*background-color: white;*/
     font-family: Ubuntu;
 }
