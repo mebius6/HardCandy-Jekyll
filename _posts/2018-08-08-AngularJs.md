@@ -9,12 +9,15 @@ color: 'rgb(154,133,255)'
 ---
 
 #### 1.基本使用
+
 - ng-app 是angular的基础指令，用来指定angularjs管理的边界，也就是说：只有ng-app内部的元素才会收到angular的管理，
 类似于:Vue实例中的el配置项
+
 - ng-controller 指令：负责启动控制器中的代码，也就是说：只有在视图中使用 ng-controller 以后，控制器中的代码才会执行
 **注意:angular找到第一个ng-app以后，就不再解析后续的ng-app，所以，默认情况下，只有第一个ng-app会生效**
 
 如果要在一个页面中启动多个 ng-app，后面的需要通过手动启动的方式来启动（但是，一般不会有这种情况出现！！！）
+
 ```html
   <!-- 第一种启动方式：使用ng-app启动 -->
   <div ng-app="myApp" ng-controller="myCtrl"></div>
@@ -72,6 +75,7 @@ color: 'rgb(154,133,255)'
 
 - 推断式创建控制器，那么angular是根据回调函数形参的名称来找服务的，
 - .controller("myCtrl",function($scope){}   **$scope形参不可变** ，如果代码压缩程序会报错
+
 ```html
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- ng-model 也是一个指令，用来实现文本框数据的双向绑定，类似于：Vue中的 v-model -->
@@ -87,9 +91,12 @@ color: 'rgb(154,133,255)'
 })
   </script>
 ```
+
 **注入式写法**
+
 - 如果使用的是注入式语法创建控制器，那么angular是根据数组中的字符串参数来找服务的
 - .controller("myCtrl",['$scope',function(**$scope**){}]} **$scope**形参可变，代码压缩后也不会影响代码运行
+
 ```html
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- ng-model 也是一个指令，用来实现文本框数据的双向绑定，类似于：Vue中的 v-model -->
@@ -173,6 +180,7 @@ color: 'rgb(154,133,255)'
   </script>
 
 ```
+
 ##### 绑定事件指令
 
 - ng-click 绑定单击事件指令，跟vue不同的是，需要加()调用
@@ -215,6 +223,7 @@ color: 'rgb(154,133,255)'
 ```
 ##### ng-bind-html
 - angular中的指令-ngSanitize模块展示html内容
+
 ```html
 <div ng-app="myApp" ng-controller="myController">
     <!-- <h1 ng-bind="msg"></h1> -->
@@ -239,6 +248,7 @@ color: 'rgb(154,133,255)'
 
 ```
 ##### ng-repeat
+
 - 用来展示列表内容，为列表中的每一项元素
 - 第一个参数:表示序列号，第二个参数:表示数组的每一项，这点与vue中的v-for 不同
      -  $index 表示遍历的每一项元素的索引号；
@@ -246,7 +256,7 @@ color: 'rgb(154,133,255)'
      -  $first 表示：当前项是不是第一项，如果是，结果为：true，否则，结果为：false
        剩余其他属性的原理与 $first 相同
 
-```
+```html
  <div ng-app="myApp" ng-controller="myController">
     <ul>
       <!-- ng-repeat 用来展示列表内容，为列表中的每一项元素，生成一个当前li标签 -->
@@ -349,6 +359,7 @@ color: 'rgb(154,133,255)'
     </script>
 ```
 ##### ng-class设置类
+
 -  ng-class 的值是一个对象，对象的键表示要添加的类名称，值是一个布尔值，如果值为true，表示添加这个类；否则，不添加这个类
 
 ```html
@@ -421,7 +432,9 @@ color: 'rgb(154,133,255)'
   </script>
 
 ```
+
 ###### watch监视数据变化
+
 -  通过 $scope.$watch() 监视数据变化
 - $watch只能监视$scope中数据的变化
 -  第一个参数：表示要监视的数据
