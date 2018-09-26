@@ -2,7 +2,7 @@
 layout: post
 title:  "AngularJS"
 date:   2018-08-08
-tags:  js
+tags:  js angular
 
 color: 'rgb(154,133,255)'
 
