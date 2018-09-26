@@ -134,9 +134,11 @@ plugins: [
 ```
 
 ##### html-webpack-plugin 插件
+
 - 安装：npm i -D html-webpack-plugin
 - 作用：根据模板，自动生成html页面
 - 优势：页面存储在内存中，自动引入bundle.js、css等文件
+
 ```js
 /* webpack.config.js */
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -153,6 +155,7 @@ plugins: [
 ```
 
 ##### Loaders（加载器）
+
 [webpack - Loaders](https://webpack.js.org/loaders/)
 [webpack - 管理资源示例](https://doc.webpack-china.org/guides/asset-management)
 
@@ -160,11 +163,14 @@ plugins: [
 - webpack通过loaders(加载器)处理非JavaScript静态资源
 
 ###### CSS打包
+
 - 1 CSS打包文件（加载）
 - 2 SASS打包文件（编译为CSS）
+
 ###### 使用webpack打包CSS
 - 安装：npm i -D style-loader css-loader
 - 注意：use中模块的顺序不能颠倒，加载顺序：从右向左加载
+
 ```js
 /* index.js */
 
@@ -184,6 +190,7 @@ module: {
   ]
 }
 ```
+
 ###### 使用webpack打包sass文件
 - 安装：npm i -D sass-loader node-sass
 - 注意：sass-loader 依赖于 node-sass 模块
@@ -207,6 +214,7 @@ module:{
 - 安装：npm i -D url-loader file-loader
 - file-loader：加载并重命名文件（图片、字体 等）
 - url-loader：将图片或字体转化为base64编码格式的字符串，嵌入到样式文件中
+
 ```js
     /* webpack.config.js */
     
@@ -220,12 +228,14 @@ module:{
       ]
     }
 ```
+
 ###### 图片打包细节
 - limit参数的作用：（单位为：字节(byte)）
   - 当图片文件大小（字节）小于指定的limit时，图片被转化为base64编码格式
   - 当图片文件大小（字节）大于等于指定的limit时，图片被重命名以url路径形式加载（此时，需要file-loader来加载图片）
 - 图片文件重命名，保证相同文件不会被加载多次。例如：一张图片（a.jpg）拷贝一个副本（b.jpg），同时引入这两张图片，重命名后只会加载一次，因为这两张图片就是同一张
 - 文件重命名以后，会通过MD5加密的方式，来计算这个文件的名称
+
 ```js
 /* webpack.config.js */
 
@@ -263,6 +273,7 @@ module: {
 - 安装：npm i -D babel-preset-env
 ##### 基本使用（两步）
 - ###### 第一步：
+
 ```js
 /* webpack.config.js */
 
@@ -275,6 +286,7 @@ module: {
 ```
 
 - ###### 第二步：在项目根目录中新建.babelrc配置文件
+
 ```js
 /* .babelrc */
 
@@ -298,6 +310,7 @@ module: {
 - ES2015 也就是 ES6, 下一个版本是ES7, 从 ES6 到 ES7之间经历了 5 个阶段
 - babel-preset-es2015 转换es6的语法
 - babel-preset-stage-0 转换比es6更新的语法
+
 ```js
 Stage 0 - Strawman（展示阶段）
 Stage 1 - Proposal（征求意见阶段）
@@ -312,6 +325,7 @@ stage 3 is "let's let browsers implement it and see how it goes",
 stage 4 is "now it's javascript".
 
 ```
+
 ##### babel-polyfill 和 transform-runtime
 - 作用：实现浏览器对不支持API的兼容（兼容旧环境、填补）
   - 在低版本浏览器中使用高级的ES6或ES7的方法或函数，比如：'abc'.padStart(10)
@@ -319,7 +333,7 @@ stage 4 is "now it's javascript".
 - 方式二  [transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/)
     - 方式一：npm i -S babel-polyfill
     - 方式二：npm i -D babel-plugin-transform-runtime 和 npm i -S babel-runtime
-  - 注意：babel-runtime包中的代码会被打包到你的代码中（-S）
+- 注意：babel-runtime包中的代码会被打包到你的代码中（-S）
 
 
 区别：
@@ -341,6 +355,7 @@ runtime  除了实例方法以外，其他兼容新问题都能解决、不污�
 
 - transform-runtime插件的使用：
   直接在 .bablerc 文件中，添加一个 plugins 的配置项即可！！！
+
 ```js
   "plugins": [
     "transform-runtime"
@@ -368,6 +383,7 @@ module.exports = {
 -  babel-loader 用来解析js文件
 -  babel-preset-* 新ES语法的解析和转换
 -  transform-runtime / babel-polyfill 兼容旧浏览器，到达支持新API目的
+
 ```js
 // 判断浏览器是否兼容 padStart 这个 API
 if (!String.prototype.padStart) {

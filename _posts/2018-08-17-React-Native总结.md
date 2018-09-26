@@ -188,27 +188,31 @@ Flexbox Style
 #### 属性矩阵
 
 - transformMatrix TransformMatrixPropType 
-### 3.adb server version (39) doesn't match this client (40); 
+
+### 3.adb server version (39) doesn't match this client (40)
 
 ##### Genymotion==>设置==>ADB=>Use custom Android SDK Tools=>选择安卓adk目录，然后cmd输入
+
 - adb kill-server
 
 - adb start-server
 
 ### 4.Genymotion不能安装APK的解决方法
+
 - 1、下载Genymotion-ARM-Translation-Librarities工具转换包；下载路径:https://pan.baidu.com/s/1sWe36TSZHPxqiaLn1TGPig
 
 - 2、将下载号的工具包直接拖拽到Genymotion中，
 
 - 3、进行操作
 
-  - 1. adb shell
+    - 1.adb shell
 
-  - 2. cd /sdcard/Download/
+    - 2.cd /sdcard/Download/
 
-  - 3. sh /system/bin/flash-archive.sh /sdcard/Download/Genymotion-ARM-Translation.zip
+    - 3.sh /system/bin/flash-archive.sh /sdcard/Download/Genymotion-ARM-Translation.zip
 
-  - 4. 重启模拟器。
+    - 4.重启模拟器。
+
 ### 5.运行react-native init Hello之后报错 "import type {CommandT} from './commands';"
 
 - 更新的react-native 0.56版本在Windows上有bug不能正常运行，所以才会一直报错，然后我试了一下react-native init xxx --version 0.55.4，即初始化时指定版本
@@ -225,6 +229,7 @@ Flexbox Style
 - (2)npm install antd-mobile --save
 - (3)npm install babel-plugin-import --save-dev
 - (4).babelrc中为
+
 ```json
 {
 

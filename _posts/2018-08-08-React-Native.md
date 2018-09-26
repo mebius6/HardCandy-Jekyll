@@ -1049,6 +1049,7 @@ AppRegistry.registerComponent('PerfectProject',() => PerfectProject);
 |（ios）snapToInterval|number|当设置了此属性时，会让滚动视图滚动停止后，停止在snapToInterval的倍数的位置。这可以在一些子视图比滚动视图本身小的时候用于实现分页显示。与snapToAlignment组合使用。
 |（ios）stickyHeaderIndices|[number]|一个子视图下标的数组，用于决定哪些成员会在滚动之后固定在屏幕顶端。举个例子，传递stickyHeaderIndices={[0]}会让第一个成员固定在滚动视图顶端。这个属性不能和horizontal={true}一起使用
 |（ios）zoomScale|number|滚动视图内容初始的缩放比例。默认值为1.0。
+
 - #### ScrollView样式
 
 ```css
@@ -1193,6 +1194,7 @@ onPanResponderMove: (event, gestureState) => {}
 - [FlatList使用文档](http://blog.csdn.net/mengks1987/article/details/70229918)
 - [FlatList进阶](http://blog.csdn.net/fsf_snail/article/details/77875527)
 - #### 属性
+
 ```js
 //分割线组件，
 ItemSeparatorComponent
@@ -1245,11 +1247,14 @@ scrollToOffset(params: {animated?: ?boolean, offset:number})：
 ```
 
 #### FlatList 长列表数据
+
 - ##### 和ScrollView不同的是，FlatList并不立即渲染所有元素，而是优先渲染屏幕上可见的元素。
 - ##### FlatList组件必须的两个属性是data和renderItem。FlatList组件是listview的升级版
   - data是列表的数据源，
   - renderItem则从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染。
+
 - 下面的例子创建了一个简单的FlatList，并预设了一些模拟数据。首先是初始化FlatList所需的data，其中的每一项（行）数据之后都在renderItem中被渲染成了Text组件，最后构成整个FlatList。
+
 ```JS
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
@@ -1432,7 +1437,9 @@ onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距�
 | refreshing | boolean | 在等待加载新数据时将此属性设为true，列表就会显示出一个正在加载的符号 |
 | renderItem | (info: {item: ItemT, index: number}) => ?React.Element<any> | 根据行数据data渲染每一行的组件 |
 | viewabilityConfig | ViewabilityConfig | 请参考[ViewabilityHelper](https://github.com/facebook/react-native/blob/master/Libraries/Lists/ViewabilityHelper.js)的源码来了解具体的配置 |
+
   - ##### 方法集合
+
 | 方法名|说明
 | --- | --- |
 | scrollToLocation | 将可视区内位于特定sectionIndex 或 itemIndex(section内)位置的列表项，滚动到可视区的制定位置。比如说，viewPosition 为0时将这个列表项滚动到可视区顶部 (可能会被顶部粘接的header覆盖), 为1时将它滚动到可视区底部, 为0.5时将它滚动到可视区中央。viewOffset是一个以像素为单位，到最终位置偏移距离的固定值，比如为了弥补粘接的header所占据的空间。注意: 如果没有设置getItemLayout，就不能滚动到位于外部渲染区的位置。 |
@@ -1441,7 +1448,7 @@ onEndReached|(info: {distanceFromEnd: number}) => void|当列表被滚动到距�
 
 - ##### SectionList示例，通讯录实现以及源码
  
-```JS
+```JSX
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -1537,6 +1544,7 @@ class MainScreen extends React.Component {
   }
 }
 ```
+
 - #### NavigatorIOS
   - 如果你只针对iOS平台开发，那么可以考虑使用NavigatorIOS。它是基于 UINavigationController封装的，所以看起来很像。
   - NavigatorIOS使用路由要渲染的组件在路由对象的component字段中指定，要给目标组件传递的参数则写在passProps中。被渲染的component都会自动接受到一个名为navigator的属性，你可以直接调用此对象(this.props.navigator)的push和pop方法。
@@ -2093,6 +2101,7 @@ cardStyle：自定义设置跳转效果
 
   }
 })
+
 ```
 
 ```jsx
@@ -2172,26 +2181,30 @@ TabNavigator({
 - [github](https://github.com/oblador/react-native-vector-icons)
 - 注意：需要集成到Android或iOS中，才可以使用！！！
 
-```html
+
 使用步骤：
-1 安装
-2 要将当前模块（包）中的安卓或ios的环境继承到rn中的安卓或ios中
+- 1 安装
+- 2 要将当前模块（包）中的安卓或ios的环境继承到rn中的安卓或ios中
   集成步骤：
-    1 react-native link
-    2 在目录 android/app/build.gradle 中，添加：
+    - 1 react-native link
+    - 2 在目录 android/app/build.gradle 中，添加：
       apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
       project.ext.vectoricons = [
         iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
       ]
-3 重新运行: react-native run-android 重新打包
-4 在 App.js 中使用
+- 3 重新运行: react-native run-android 重新打包
+- 4 在 App.js 中使用
+
+```JS
   import Icon from 'react-native-vector-icons/FontAwesome'
   <Icon name="user-circle-o" size={30} color="#000" />
+```
 
-只要重新安装了一个新的包，就需要执行下面这句话，才能正确使用 字体图标库，否则，就会报错！！！
+##### 只要重新安装了一个新的包，就需要执行下面这句话，才能正确使用 字体图标库，否则，就会报错！！！
+
 5 rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json
 参考：https://github.com/oblador/react-native-vector-icons/issues/626
-```
+
 
 ```js
 import Icon from 'react-native-vector-icons/FontAwesome'
