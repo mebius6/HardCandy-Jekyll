@@ -38,62 +38,80 @@
         border-bottom: 1px solid #000000;
     }
 
-     #main img{
+     .box img{
                 width:250px;
                 height: 200px;
-                position: absolute;
-                border:5px green double;
+            
             }
-            #main img:nth-child(1){
-                transform: translateZ(500px);
+            .box div:nth-child(1){
+                transform: rotateY(0deg) translateZ(275px);
             } 
-            #main img:nth-child(2){
-                transform: rotateY(40deg) translateZ(500px);
+            .box div:nth-child(2){
+                transform: rotateY(40deg) translateZ(275px);
             }
-            #main img:nth-child(3){
-                transform: rotateY(80deg) translatez(500px);
+            .box div:nth-child(3){
+                transform: rotateY(80deg) translateZ(275px);
             }
-            #main img:nth-child(4){
-                transform: rotateY(120deg) translatez(500px);
+            .box div:nth-child(4){
+                transform: rotateY(120deg) translateZ(275px);
             }
-            #main img:nth-child(5){
-                transform: rotateY(160deg) translatez(500px);
+            .box div:nth-child(5){
+                transform: rotateY(160deg) translateZ(275px);
             }
-            #main img:nth-child(6){
-                transform: rotateY(200deg) translatez(500px);
+            .box div:nth-child(6){
+                transform: rotateY(200deg) translateZ(275px);
             }
-            #main img:nth-child(7){
-                transform: rotateY(240deg) translatez(500px);
+            .box div:nth-child(7){
+                transform: rotateY(240deg) translateZ(275px);
             }
-            #main img:nth-child(8){
-                transform: rotateY(280deg) translatez(500px);
+            .box div:nth-child(8){
+                transform: rotateY(280deg) translateZ(275px);
             }
-            #main img:nth-child(9){
-                transform: rotateY(320deg) translatez(500px);
-            }
-            
-            /*# id选择器   id不能重复命名*/
-            #main{
-                margin: 100px auto;/*让父元素居中*/
-                width: 300px;
-                height: 400px;
-                /*声明一个3D空间*/
-                transform-style: preserve-3d;
-              
-                animation-name: animate;
-                animation-duration: 10s; /*动画执行次数*/
-                animation-iteration-count: infinite; /*动画持续时间：无限 */
-                animation-timing-function: linear;
-                position: relative;
+            .box div:nth-child(9){
+                transform: rotateY(320deg) translateZ(275px);
             }
             
-            /*定义一个动画*/
-            @keyframes animate {
-                0%{
-                    transform: rotateX(-10deg) rotateY(0deg) ;
-                }
-                100%{
-                    transform: rotateX(-10deg) rotateY(360deg) ;
-                }
-            }
+            @keyframes fn{
+				0% {transform:rotateX(-15deg) rotateY(0deg);}
+			    100%{transform:rotateX(-15deg) rotateY(360deg);}
+
+			}
+			@-moz-keyframes fn{
+				0% {transform:rotateX(-15deg) rotateY(0deg);}
+			    100%{transform:rotateX(-15deg) rotateY(360deg);}
+			}
+			@-ms-keyframes fn{
+				0% {transform:rotateX(-15deg) rotateY(0deg);}
+			    100%{transform:rotateX(-15deg) rotateY(360deg);}
+			}
+			@-webkit-keyframes fn{
+				0% {transform:rotateX(-15deg) rotateY(0deg);}
+			    100%{transform:rotateX(-15deg) rotateY(360deg);}
+			}
+			.box{				
+		    	width:200px;
+            	height:300px;
+            	position:relative;
+            	margin:auto;
+            	margin-top:150px;
+            	transform-style:preserve-3d;
+            	transform:rotateX(-10deg);
+            	animation: fn 10s;
+            	animation-iteration-count: infinite;
+		    	animation-timing-function: linear;
+		    	position: relative
+			}
+			.box:hover{
+				animation-play-state: paused;
+			}
+			.box>div{
+				width:250px;
+				height:200px;
+				position: absolute;
+				left:0;
+				top:0;
+				
+			}
+
+
 </style>
