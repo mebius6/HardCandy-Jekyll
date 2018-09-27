@@ -13,7 +13,12 @@ home-title: 我的宣言.
   <ul class="ex-list">
     <li class="fadeInUp animated">
       {% if site.author %}
-      <div class="portraits"><img src="{{ site.portraits }}" alt=""></div>
+      <div id="main">
+        {% for i in site.portraits %}
+        <img src="{{ i }}" alt="">
+        {% endfor%}
+    </div>
+     
       <span id="yourname">{{ site.name }}</span>
       <span id="yourbio">{{ site.bio }}</span>
       {% if site.about %}
