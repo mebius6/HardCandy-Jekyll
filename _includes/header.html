@@ -79,7 +79,7 @@
                 height: 400px;
                 /*声明一个3D空间*/
                 transform-style: preserve-3d;
-                transform: rotateX(-10deg);
+              
                 animation-name: animate;
                 animation-duration: 10s; /*动画执行次数*/
                 animation-iteration-count: infinite; /*动画持续时间：无限 */
@@ -90,10 +90,10 @@
             /*定义一个动画*/
             @keyframes animate {
                 0%{
-                    transform:  rotateY(0deg) ;
+                    transform: rotateX(-10deg) rotateY(0deg) ;
                 }
                 100%{
-                    transform: rotateY(360deg) ;
+                    transform: rotateX(-10deg) rotateY(360deg) ;
                 }
             }
 </style>
