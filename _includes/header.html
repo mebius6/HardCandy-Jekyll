@@ -38,80 +38,113 @@
         border-bottom: 1px solid #000000;
     }
 
-     .box img{
-                width:250px;
-                height: 200px;
-            
-            }
-            .box div:nth-child(1){
-                transform: rotateY(0deg) translateZ(275px);
-            } 
-            .box div:nth-child(2){
-                transform: rotateY(40deg) translateZ(275px);
-            }
-            .box div:nth-child(3){
-                transform: rotateY(80deg) translateZ(275px);
-            }
-            .box div:nth-child(4){
-                transform: rotateY(120deg) translateZ(275px);
-            }
-            .box div:nth-child(5){
-                transform: rotateY(160deg) translateZ(275px);
-            }
-            .box div:nth-child(6){
-                transform: rotateY(200deg) translateZ(275px);
-            }
-            .box div:nth-child(7){
-                transform: rotateY(240deg) translateZ(275px);
-            }
-            .box div:nth-child(8){
-                transform: rotateY(280deg) translateZ(275px);
-            }
-            .box div:nth-child(9){
-                transform: rotateY(320deg) translateZ(275px);
-            }
-            
-            @keyframes fn{
-				0% {transform:rotateX(-15deg) rotateY(0deg);}
-			    100%{transform:rotateX(-15deg) rotateY(360deg);}
+    .box img {
+        width: 200px;
+        height: 200px;
 
-			}
-			@-moz-keyframes fn{
-				0% {transform:rotateX(-15deg) rotateY(0deg);}
-			    100%{transform:rotateX(-15deg) rotateY(360deg);}
-			}
-			@-ms-keyframes fn{
-				0% {transform:rotateX(-15deg) rotateY(0deg);}
-			    100%{transform:rotateX(-15deg) rotateY(360deg);}
-			}
-			@-webkit-keyframes fn{
-				0% {transform:rotateX(-15deg) rotateY(0deg);}
-			    100%{transform:rotateX(-15deg) rotateY(360deg);}
-			}
-			.box{				
-		    	width:200px;
-            	height:300px;
-            	position:relative;
-            	margin:auto;
-            	margin-top:150px;
-            	transform-style:preserve-3d;
-            	transform:rotateX(-10deg);
-            	animation: fn 10s;
-            	animation-iteration-count: infinite;
-		    	animation-timing-function: linear;
-		    	position: relative
-			}
-			.box:hover{
-				animation-play-state: paused;
-			}
-			.box>div{
-				width:250px;
-				height:200px;
-				position: absolute;
-				left:0;
-				top:0;
-				
-			}
+    }
 
+    .box div:nth-child(1) {
+        transform: rotateY(0deg) translateZ(275px);
+    }
 
+    .box div:nth-child(2) {
+        transform: rotateY(40deg) translateZ(275px);
+    }
+
+    .box div:nth-child(3) {
+        transform: rotateY(80deg) translateZ(275px);
+    }
+
+    .box div:nth-child(4) {
+        transform: rotateY(120deg) translateZ(275px);
+    }
+
+    .box div:nth-child(5) {
+        transform: rotateY(160deg) translateZ(275px);
+    }
+
+    .box div:nth-child(6) {
+        transform: rotateY(200deg) translateZ(275px);
+    }
+
+    .box div:nth-child(7) {
+        transform: rotateY(240deg) translateZ(275px);
+    }
+
+    .box div:nth-child(8) {
+        transform: rotateY(280deg) translateZ(275px);
+    }
+
+    .box div:nth-child(9) {
+        transform: rotateY(320deg) translateZ(275px);
+    }
+
+    @keyframes fn {
+        0% {
+            transform: rotateX(-15deg) rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateX(-15deg) rotateY(360deg);
+        }
+
+    }
+
+    @-moz-keyframes fn {
+        0% {
+            transform: rotateX(-15deg) rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateX(-15deg) rotateY(360deg);
+        }
+    }
+
+    @-ms-keyframes fn {
+        0% {
+            transform: rotateX(-15deg) rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateX(-15deg) rotateY(360deg);
+        }
+    }
+
+    @-webkit-keyframes fn {
+        0% {
+            transform: rotateX(-15deg) rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateX(-15deg) rotateY(360deg);
+        }
+    }
+
+    .box {
+        width: 200px;
+        height: 300px;
+        position: relative;
+        margin: auto;
+        margin-top: 150px;
+        transform-style: preserve-3d;
+        transform: rotateX(-10deg);
+        animation: fn 10s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        position: relative
+    }
+
+    .box:hover {
+        animation-play-state: paused;
+    }
+
+    .box>div {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+    }
 </style>
