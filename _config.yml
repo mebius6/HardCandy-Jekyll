@@ -1,5 +1,5 @@
 # Site settings 配置站点
-title: '梦想的力量'
+title: 'mebius'
 description: '前端'
 keywords: 'html, css,js,vue,react,angular,node,react-native,type-script,工具,后端'
 url: 'https://mebius6.github.io/' # your host
@@ -14,9 +14,9 @@ nav: # 最佳体验 六个标签 且最好每个标签不超过4中文字
 
 # 博主
 author: true
-name: 'dream'
-NickName: 'dream'
-webtitle: '梦想的力量'
+name: 'hero'
+NickName: 'hero'
+webtitle: 'mebius'
 bio: '人生苦短我用python'
 about: true
 aboutyou: '水光潋滟晴方好，山色空蒙雨亦奇。'
