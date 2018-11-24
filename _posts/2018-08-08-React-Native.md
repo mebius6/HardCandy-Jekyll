@@ -2,7 +2,7 @@
 layout: post
 title:  "ReactNative"
 date:   2018-08-08
-tags:  js react-native 
+tags: js技术框架
 
 color: 'rgb(154,133,255)'
 

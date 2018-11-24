@@ -1,7 +1,7 @@
 # Site settings 配置站点
 title: 'mebius'
 description: '前端'
-keywords: 'html, css,js,vue,react,angular,node,react-native,type-script,工具,后端'
+keywords: 'html, css,js,技术框架，node,type-script,工具,后端,编程思想'
 url: 'https://mebius6.github.io/' # your host
 
 # nav 中文字符空格：&emsp;

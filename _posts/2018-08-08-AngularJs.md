@@ -2,7 +2,7 @@
 layout: post
 title:  "AngularJS"
 date:   2018-08-08
-tags:  js angular
+tags:  js技术框架
 
 color: 'rgb(154,133,255)'
 
