@@ -2,7 +2,7 @@
 layout: post
 title:  "JavaScript函数库"
 date:   2018-09-19
-tags:  js vue
+tags:  js
 color: 'rgb(154,133,255)'
 
 ---
