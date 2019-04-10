@@ -1304,7 +1304,7 @@ distinct | 去重
 ### select()
 　　显示name、age字段，不显示_id字段
 
-```
+```js
         temp.find().select("name age -_id").exec(function(err,docs){
             //[ { name: 'huochai', age: 27 },{ name: 'wang', age: 18 },{ name: 'huo', age: 30 },{ name: 'li', age: 20 } ]
             console.log(docs);
@@ -1339,359 +1339,402 @@ distinct | 去重
             console.log(distinct);//[ 1, 2 ]
         }); 
 ```
-文档验证
+## 文档验证
 为什么需要文档验证呢？以一个例子作为说明，schema进行如下定义
 
-var schema = new mongoose.Schema({ age:Number, name: String,x:Number,y:Number});
+```js
+        var schema = new mongoose.Schema({ age:Number, name: String,x:Number,y:Number});
+```
 　　如果不进行文档验证，保存文档时，就可以不按照Schema设置的字段进行设置，分为以下几种情况
 
 　　1、缺少字段的文档可以保存成功
 
-var temp = mongoose.model('temp', schema);
-new temp({age:10}).save(function(err,doc){
-    //{ __v: 0, age: 10, _id: 597304442b70086a1ce3cf05 }
-    console.log(doc);
-}); 
+```js
+        var temp = mongoose.model('temp', schema);
+        new temp({age:10}).save(function(err,doc){
+            //{ __v: 0, age: 10, _id: 597304442b70086a1ce3cf05 }
+            console.log(doc);
+        }); 
+```
 　　2、包含未设置的字段的文档也可以保存成功，未设置的字段不被保存
 
-new temp({age:100,abc:"abc"}).save(function(err,doc){
-    //{ __v: 0, age: 100, _id: 5973046a2bb57565b474f48b }
-    console.log(doc);
-}); 
+```js
+        new temp({age:100,abc:"abc"}).save(function(err,doc){
+            //{ __v: 0, age: 100, _id: 5973046a2bb57565b474f48b }
+            console.log(doc);
+        });
+```
 　　3、包含字段类型与设置不同的字段的文档也可以保存成功，不同字段类型的字段被保存为设置的字段类型
 
-new temp({age:true,name:10}).save(function(err,doc){
-    //{ __v: 0, age: 1, name: '10', _id: 597304f7a926033060255366 }
-    console.log(doc);
-}); 
+```js
+        new temp({age:true,name:10}).save(function(err,doc){
+            //{ __v: 0, age: 1, name: '10', _id: 597304f7a926033060255366 }
+            console.log(doc);
+        }); 
+```
 　　而通过文档验证，就可以避免以下几种情况发生
 
 　　文档验证在SchemaType中定义，格式如下
 
-{name: {type:String, validator:value}}
+```js
+        {name: {type:String, validator:value}}
+```
 　　常用验证包括以下几种
 
-required: 数据必须填写
-default: 默认值
-validate: 自定义匹配
-min: 最小值(只适用于数字)
-max: 最大值(只适用于数字)
-match: 正则匹配(只适用于字符串)
-enum:  枚举匹配(只适用于字符串)
-required
+- required: 数据必须填写
+- default: 默认值
+- validate: 自定义匹配
+- min: 最小值(只适用于数字)
+- max: 最大值(只适用于数字)
+- match: 正则匹配(只适用于字符串)
+- enum:  枚举匹配(只适用于字符串)
+### required
 　　将age设置为必填字段，如果没有age字段，文档将不被保存，且出现错误提示
 
-var schema = new mongoose.Schema({ age:{type:Number,required:true}, name: String,x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({name:"abc"}).save(function(err,doc){
-    //Path `age` is required.
-    console.log(err.errors['age'].message);
-}); 
-default
+```js
+        var schema = new mongoose.Schema({ age:{type:Number,required:true}, name: String,x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({name:"abc"}).save(function(err,doc){
+            //Path `age` is required.
+            console.log(err.errors['age'].message);
+        }); 
+```
+### default
 　　设置age字段的默认值为18，如果不设置age字段，则会取默认值
 
-var schema = new mongoose.Schema({ age:{type:Number,default:18}, name:String,x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({name:'a'}).save(function(err,doc){
-    //{ __v: 0, name: 'a', _id: 59730d2e7a751d81582210c1, age: 18 }
-    console.log(doc);
-}); 
-min | max
+```js
+        var schema = new mongoose.Schema({ age:{type:Number,default:18}, name:String,x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({name:'a'}).save(function(err,doc){
+            //{ __v: 0, name: 'a', _id: 59730d2e7a751d81582210c1, age: 18 }
+            console.log(doc);
+        }); 
+```
+### min | max
 　　将age的取值范围设置为[0,10]。如果age取值为20，文档将不被保存，且出现错误提示
 
-var schema = new mongoose.Schema({ age:{type:Number,min:0,max:10}, name: String,x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({age:20}).save(function(err,doc){
-    //Path `age` (20) is more than maximum allowed value (10).
-    console.log(err.errors['age'].message);
-}); 
-match
+```js
+        var schema = new mongoose.Schema({ age:{type:Number,min:0,max:10}, name: String,x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({age:20}).save(function(err,doc){
+            //Path `age` (20) is more than maximum allowed value (10).
+            console.log(err.errors['age'].message);
+        });
+```
+### match
 　　将name的match设置为必须存在'a'字符。如果name不存在'a'，文档将不被保存，且出现错误提示
 
-var schema = new mongoose.Schema({ age:Number, name:{type:String,match:/a/},x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({name:'bbb'}).save(function(err,doc){
-    //Path `name` is invalid (bbb).
-    console.log(err.errors['name'].message);
-}); 
-enum
+```js
+        var schema = new mongoose.Schema({ age:Number, name:{type:String,match:/a/},x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({name:'bbb'}).save(function(err,doc){
+            //Path `name` is invalid (bbb).
+            console.log(err.errors['name'].message);
+        }); 
+```
+### enum
 　　将name的枚举取值设置为['a','b','c']，如果name不在枚举范围内取值，文档将不被保存，且出现错误提示
 
-var schema = new mongoose.Schema({ age:Number, name:{type:String,enum:['a','b','c']},x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({name:'bbb'}).save(function(err,doc){
-    //`bbb` is not a valid enum value for path `name`.
-    console.log(err.errors['name'].message);
+```js
+        var schema = new mongoose.Schema({ age:Number, name:{type:String,enum:['a','b','c']},x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({name:'bbb'}).save(function(err,doc){
+            //`bbb` is not a valid enum value for path `name`.
+            console.log(err.errors['name'].message);
 
-}); 
-validate
+        });
+```
+### validate
 　　validate实际上是一个函数，函数的参数代表当前字段，返回true表示通过验证，返回false表示未通过验证。利用validate可以自定义任何条件。比如，定义名字name的长度必须在4个字符以上
 
-var validateLength = function(arg){
-    if(arg.length > 4){
-        return true;
-    }
-    return false;
-};
-var schema = new mongoose.Schema({ name:{type:String,validate:validateLength}, age:Number,x:Number,y:Number});  
-var temp = mongoose.model('temp', schema);
-new temp({name:'abc'}).save(function(err,doc){
-    //Validator failed for path `name` with value `abc`
-    console.log(err.errors['name'].message);
-}); 
-练习
+```js
+        var validateLength = function(arg){
+            if(arg.length > 4){
+                return true;
+            }
+            return false;
+        };
+        var schema = new mongoose.Schema({ name:{type:String,validate:validateLength}, age:Number,x:Number,y:Number});  
+        var temp = mongoose.model('temp', schema);
+        new temp({name:'abc'}).save(function(err,doc){
+            //Validator failed for path `name` with value `abc`
+            console.log(err.errors['name'].message);
+        });
+```
+# 练习
 本节引用 mongoose的基本使用 有删改
 
-连接数据库
+## 连接数据库
 编辑 test.js ：
 
-var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://127.0.0.1:27017/test');
-db.connection.on('error', function(error){
-  console.log('数据库test连接失败：' + error);
-});
-db.connection.on('open', function(){
-  console.log('数据库test连接成功');
-});
+```js
+        var mongoose = require('mongoose');
+        var db = mongoose.connect('mongodb://127.0.0.1:27017/test');
+        db.connection.on('error', function(error){
+          console.log('数据库test连接失败：' + error);
+        });
+        db.connection.on('open', function(){
+          console.log('数据库test连接成功');
+        });
+```
 接着先打开一个 iTerm2 终端，开启 mongodb 服务：
 
-mongod
+```js
+        mongod
+```
+
 再打开另一个 iTerm2 终端，运行 test.js：
 
-node test.js
-//成功后便会输出：数据库test连接成功
-Schema/Model/Entity
+```js
+        node test.js
+        //成功后便会输出：数据库test连接成功
+```
+## Schema/Model/Entity
 没有比文档更详细的了：http://mongoosejs.com/docs/gu...
 
-Schema：数据库集合的结构对象。
-Model ：由Schema构造而成，可操作数据库。
-Entity：由Model创建的实体，可操作数据库。
+- Schema：数据库集合的结构对象。
+- Model ：由Schema构造而成，可操作数据库。
+- Entity：由Model创建的实体，可操作数据库。
 
 看完文档后，再看看下面一段代码配合理解一下：
 
-var mongoose = require("mongoose");
-var db = mongoose.connect("mongodb://127.0.0.1:27017/test");
-// var testModel = db.model('test1', testSchema); // 集合名称；集合的结构对象
-var TestSchema = new mongoose.Schema({
-    name : { type:String },
-    age  : { type:Number, default:0 },
-    email: { type:String },
-    time : { type:Date, default:Date.now }
-});
-var TestModel = db.model("test1", TestSchema );
-var TestEntity = new TestModel({
-    name : "helloworld",
-    age  : 28,
-    email: "helloworld@qq.com"
-});
-TestEntity.save(function(error,doc){
-  if(error){
-     console.log("error :" + error);
-  }else{
-     console.log(doc);
-  }
-});
-model 数据插入
+```js
+        var mongoose = require("mongoose");
+        var db = mongoose.connect("mongodb://127.0.0.1:27017/test");
+        // var testModel = db.model('test1', testSchema); // 集合名称；集合的结构对象
+        var TestSchema = new mongoose.Schema({
+            name : { type:String },
+            age  : { type:Number, default:0 },
+            email: { type:String },
+            time : { type:Date, default:Date.now }
+        });
+        var TestModel = db.model("test1", TestSchema );
+        var TestEntity = new TestModel({
+            name : "helloworld",
+            age  : 28,
+            email: "helloworld@qq.com"
+        });
+        TestEntity.save(function(error,doc){
+          if(error){
+             console.log("error :" + error);
+          }else{
+             console.log(doc);
+          }
+        });
+```
+## model 数据插入
 在前面的数据库连接成功的前提下，我们在数据库 test 下新建一个集合 test1 、并往里面插入保存一组数据：
 
-var testSchema = new mongoose.Schema({
-  name: {type: String},
-  age: {type: Number, default: 0},
-  email: {type: String},
-  time: {type: Date, default: Date.now}
-});
-var testModel = db.model('test1', testSchema); // 集合名称；集合的结构对象
-// Document文档（关联数组式的对象） < Collection集合 < 数据库
-// 插入保存一段数据
-testModel.create([
-  {name: "test1", age: 8},
-  {name: "test2", age: 18},
-  {name: "test3", age: 28},
-  {name: "test4", age: 38},
-  {name: "test5", age: 48},
-  {name: "test6", age: 58, email:"tttt@qq.com"},
-  {name: "test7", age: 68, email:"ssss@qq.com"},
-  {name: "test8", age: 18},
-  {name: "test9", age: 18, email:"rrrr@qq.com"},
-  {name: "test10",age: 18}
-], function (error, docs) {
-  if(error) {
-    console.log(error);
-  } else {
-    console.log('save ok');
-    console.log(docs);
-  }
-});
-find 数据查询
+```js
+        var testSchema = new mongoose.Schema({
+          name: {type: String},
+          age: {type: Number, default: 0},
+          email: {type: String},
+          time: {type: Date, default: Date.now}
+        });
+        var testModel = db.model('test1', testSchema); // 集合名称；集合的结构对象
+        // Document文档（关联数组式的对象） < Collection集合 < 数据库
+        // 插入保存一段数据
+        testModel.create([
+          {name: "test1", age: 8},
+          {name: "test2", age: 18},
+          {name: "test3", age: 28},
+          {name: "test4", age: 38},
+          {name: "test5", age: 48},
+          {name: "test6", age: 58, email:"tttt@qq.com"},
+          {name: "test7", age: 68, email:"ssss@qq.com"},
+          {name: "test8", age: 18},
+          {name: "test9", age: 18, email:"rrrr@qq.com"},
+          {name: "test10",age: 18}
+        ], function (error, docs) {
+          if(error) {
+            console.log(error);
+          } else {
+            console.log('save ok');
+            console.log(docs);
+          }
+        });
+```
+## find 数据查询
 mongoose 提供了find、findOne、和findById方法用于文档查询。
 基本语法：
 
-model.find(Conditions,fields,options,callback(err, doc));
-// Conditions: 查询条件
-// fields: 返回的字段
-// options: 游标（sort,limit）
-// callback: 回调函数，参数doc为查询出来的结果
+```js
+        model.find(Conditions,fields,options,callback(err, doc));
+        // Conditions: 查询条件
+        // fields: 返回的字段
+        // options: 游标（sort,limit）
+        // callback: 回调函数，参数doc为查询出来的结果
+```
 条件查询的基础：
 
-$lt (小于<)
-$lte (小于等于<=)
-$gt (大于>)
-$gte (大于等于>=)
-$ne (不等于,不包含!=)
-$in (包含)
-$or (查询多个键值的任意给定值)
-$exists (判断某些属性是否存在)
-$all (全部)
+```js
+        $lt (小于<)
+        $lte (小于等于<=)
+        $gt (大于>)
+        $gte (大于等于>=)
+        $ne (不等于,不包含!=)
+        $in (包含)
+        $or (查询多个键值的任意给定值)
+        $exists (判断某些属性是否存在)
+        $all (全部)
+```
 
 具体的一些实例，代码里已有详细注释：
 
-// find(Conditions,fields,callback);
-// 省略或为空、返回所有记录；只包含name,age字段，去掉默认的_id字段；执行回调函数
-testModel.find({}, {name:1, age:1, _id:0}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('{}查询结果为：');
-    console.log(docs);
-  }
-});
-----
-{}查询结果为：
-[ { name: 'test3', age: 28 },
-  { name: 'test2', age: 18 },
-  { name: 'test1', age: 8 },
-  { name: 'test6', age: 58 },
-  { name: 'test4', age: 38 },
-  { name: 'test7', age: 68 },
-  { name: 'test8', age: 18 },
-  { name: 'test9', age: 18 },
-  { name: 'test5', age: 48 },
-  { name: 'test10', age: 18 } ]
-----
-// 查询age大于等于28，小于等于48
-testModel.find({age: {$gte: 28, $lte: 48}}, {name:1, age:1, _id:0}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('$gte,$lte查询结果为：');
-    console.log(docs);
-  }
-});
-----
-$gte,$lte查询结果为：
-[ { name: 'test3', age: 28 },
-  { name: 'test4', age: 38 },
-  { name: 'test5', age: 48 } ]
-----
-// 查询age为58、68的2条数据
-testModel.find({age: {$in: [58, 68]}}, {name:1, age:1, _id:0}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('$in查询结果为：');
-    console.log(docs);
-  }
-});
-----
-$in查询结果为：
-[ { name: 'test6', age: 58 }, { name: 'test7', age: 68 } ]
-----
-// 查询name为test3、或者age为18的全部数据
-testModel.find({$or: [{name: 'test3'}, {age: 18}]}, {name:1, age:1, _id:0}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('$or查询结果为：');
-    console.log(docs);
-  }
-});
-----
-$or查询结果为：
-[ { name: 'test3', age: 28 },
-  { name: 'test2', age: 18 },
-  { name: 'test8', age: 18 },
-  { name: 'test9', age: 18 },
-  { name: 'test10', age: 18 } ]
-----
+```js
+        // find(Conditions,fields,callback);
+        // 省略或为空、返回所有记录；只包含name,age字段，去掉默认的_id字段；执行回调函数
+        testModel.find({}, {name:1, age:1, _id:0}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('{}查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        {}查询结果为：
+        [ { name: 'test3', age: 28 },
+          { name: 'test2', age: 18 },
+          { name: 'test1', age: 8 },
+          { name: 'test6', age: 58 },
+          { name: 'test4', age: 38 },
+          { name: 'test7', age: 68 },
+          { name: 'test8', age: 18 },
+          { name: 'test9', age: 18 },
+          { name: 'test5', age: 48 },
+          { name: 'test10', age: 18 } ]
+        ----
+        // 查询age大于等于28，小于等于48
+        testModel.find({age: {$gte: 28, $lte: 48}}, {name:1, age:1, _id:0}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('$gte,$lte查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        $gte,$lte查询结果为：
+        [ { name: 'test3', age: 28 },
+          { name: 'test4', age: 38 },
+          { name: 'test5', age: 48 } ]
+        ----
+        // 查询age为58、68的2条数据
+        testModel.find({age: {$in: [58, 68]}}, {name:1, age:1, _id:0}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('$in查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        $in查询结果为：
+        [ { name: 'test6', age: 58 }, { name: 'test7', age: 68 } ]
+        ----
+        // 查询name为test3、或者age为18的全部数据
+        testModel.find({$or: [{name: 'test3'}, {age: 18}]}, {name:1, age:1, _id:0}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('$or查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        $or查询结果为：
+        [ { name: 'test3', age: 28 },
+          { name: 'test2', age: 18 },
+          { name: 'test8', age: 18 },
+          { name: 'test9', age: 18 },
+          { name: 'test10', age: 18 } ]
+        ----
 
-// step3：游标查询
-// 查询name为test3、或者age为18的全部数据；但限制只查询2条数据
-testModel.find({$or: [{name: 'test3'}, {age: 18}]}, {name:1, age:1, _id:0}, {limit: 2}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('limit查询结果为：');
-    console.log(docs);
-  }
-});
-----
-limit查询结果为：
-[ { name: 'test3', age: 28 }, { name: 'test2', age: 18 } ]
-----
+        // step3：游标查询
+        // 查询name为test3、或者age为18的全部数据；但限制只查询2条数据
+        testModel.find({$or: [{name: 'test3'}, {age: 18}]}, {name:1, age:1, _id:0}, {limit: 2}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('limit查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        limit查询结果为：
+        [ { name: 'test3', age: 28 }, { name: 'test2', age: 18 } ]
+        ----
 
-//查询age大于等于28，小于等于48;降序输出
-testModel.find({age: {$gte: 28, $lte: 48}}, {name:1, age:1, _id:0}, {sort: {age: -1}}, function(err, docs){
-  if (err) {
-    console.log('查询出错：' + err);
-  } else {
-    console.log('sort查询结果为：');
-    console.log(docs);
-  }
-});
-----
-sort查询结果为：
-[ { name: 'test5', age: 48 },
-  { name: 'test4', age: 38 },
-  { name: 'test3', age: 28 } ]
-----
-update 数据更新
+        //查询age大于等于28，小于等于48;降序输出
+        testModel.find({age: {$gte: 28, $lte: 48}}, {name:1, age:1, _id:0}, {sort: {age: -1}}, function(err, docs){
+          if (err) {
+            console.log('查询出错：' + err);
+          } else {
+            console.log('sort查询结果为：');
+            console.log(docs);
+          }
+        });
+        ----
+        sort查询结果为：
+        [ { name: 'test5', age: 48 },
+          { name: 'test4', age: 38 },
+          { name: 'test3', age: 28 } ]
+        ----
+```
+## update 数据更新
 基本使用：model.update(查询条件,更新对象,callback);
 
-var conditions = {name: 'test1'};
-var update = {$set: {age: 11 }};
-testModel.update(conditions, update, function(error){
-  if(error) {
-    console.log(error);
-  } else {
-    console.log('Update success!');
-    testModel.find({name: 'test1'}, {name:1, age:1, _id:0}, function(err, docs){
-      if (err) {
-        console.log('查询出错：' + err);
-      } else {
-        console.log('更新test1后的查询结果为：');
-        console.log(docs);  
-        // 更新test_update后的查询结果为空数组：[ ];
-        // 更新test1后的查询结果为: [ { name: 'test1', age: 11 } ]
-        // 只能更新本来已存在的数据
-      }
-    });
-  }
----
-Update success!
-更新test1后的查询结果为：
-[ { name: 'test1', age: 11 } ]
----
-remove 数据删除
+```js
+        var conditions = {name: 'test1'};
+        var update = {$set: {age: 11 }};
+        testModel.update(conditions, update, function(error){
+          if(error) {
+            console.log(error);
+          } else {
+            console.log('Update success!');
+            testModel.find({name: 'test1'}, {name:1, age:1, _id:0}, function(err, docs){
+              if (err) {
+                console.log('查询出错：' + err);
+              } else {
+                console.log('更新test1后的查询结果为：');
+                console.log(docs);  
+                // 更新test_update后的查询结果为空数组：[ ];
+                // 更新test1后的查询结果为: [ { name: 'test1', age: 11 } ]
+                // 只能更新本来已存在的数据
+              }
+            });
+          }
+        ---
+        Update success!
+        更新test1后的查询结果为：
+        [ { name: 'test1', age: 11 } ]
+        ---
+```
+## remove 数据删除
 基本使用：model.remove(查询条件,callback);
 
-var conditions = {name: 'test2'};
-testModel.remove(conditions, function(error){
-  if(error) {
-    console.log(error);
-  } else {
-    console.log('Delete success!');
-    testModel.find({name: 'test2'}, {name:1, age:1, _id:0}, function(err, docs){
-      if (err) {
-        console.log('查询出错：' + err);
-      } else {
-        console.log('删除test2后的查询结果为：');
-        console.log(docs);  // 删除test2后的查询结果为空数组：[ ];
-      }
-    });
-  }
-});
-----
-Delete success!
-删除test2后的查询结果为：
-[]
-----
+```js
+        var conditions = {name: 'test2'};
+        testModel.remove(conditions, function(error){
+          if(error) {
+            console.log(error);
+          } else {
+            console.log('Delete success!');
+            testModel.find({name: 'test2'}, {name:1, age:1, _id:0}, function(err, docs){
+              if (err) {
+                console.log('查询出错：' + err);
+              } else {
+                console.log('删除test2后的查询结果为：');
+                console.log(docs);  // 删除test2后的查询结果为空数组：[ ];
+              }
+            });
+          }
+        });
+        ----
+        Delete success!
+        删除test2后的查询结果为：
+        []
+        ----
+```
