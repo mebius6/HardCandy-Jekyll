@@ -1,21 +1,25 @@
 ---
 layout: post
-title:  "React-Native总结"
-date:   2018-08-17
-tags: js技术框架
+title: 'React-Native总结'
+date: 2018-08-17
+tags: 随笔
 
 color: 'rgb(154,133,255)'
-
 ---
-### 1.windows-bug 启动不成功--清除andriod 残余文件
+
+### 1.windows-bug 启动不成功--清除 andriod 残余文件
+
 - cd android
 - gradlew clean
+
 ### 2.View Style
-#### 支持Flexbox、ShadowPropTypesIOS、Transforms属性。
+
+#### 支持 Flexbox、ShadowPropTypesIOS、Transforms 属性。
 
 #### 背面可见性
 
 - backfaceVisibility enum('visible', 'hidden')
+
 #### 背景颜色
 
 - backgroundColor string
@@ -35,6 +39,7 @@ color: 'rgb(154,133,255)'
 - borderTopRightRadius number
 - borderBottomLeftRadius number
 - borderBottomRightRadius number
+
 #### 边框样式
 
 - borderStyle enum('solid', 'dotted', 'dashed')
@@ -46,27 +51,37 @@ color: 'rgb(154,133,255)'
 - borderRightWidth number
 - borderBottomWidth number
 - borderLeftWidth number
+
 #### 不透明度
+
 - opacity number
+
 #### 填充
+
 - overflow enum('visible', 'hidden')
 
-#### 测试ID（用来定位视图）
+#### 测试 ID（用来定位视图）
+
 - testID string
 
-### Image Style 
-#### 支持Flexbox和Transforms
+### Image Style
+
+#### 支持 Flexbox 和 Transforms
+
 #### 调整大小模式
 
 - resizeMode Object.keys(ImageResizeMode)
+
 #### 背景颜色
 
 - backgroundColor string
+
 #### 边框属性
 
 - borderColor string
 - borderWidth number
 - borderRadius number
+
 #### 填充
 
 - overflow enum('visible', 'hidden')
@@ -80,33 +95,46 @@ color: 'rgb(154,133,255)'
 - opacity number
 
 ### Text Style
-#### 支持View的样式
+
+#### 支持 View 的样式
 
 #### 字体颜色
 
 - color string
+
 #### 字体
 
 - fontFamily string
+
 #### 一行省略
-- numberOfLines  number
+
+- numberOfLines number
+
 #### 字体大小
 
 - fontSize number
+
 #### 字体样式
+
 fontStyle enum('normal', 'italic')
 字体粗细（指定字体的粗细。大多数字体都支持’normal’和’bold’值。并非所有字体都支持所有的数字值。如果某个值不支持，则会自动选择最接近的值。）
 
 - fontWeight enum("normal", 'bold', '100', '200', '300', '400', '500', '600', '700', '800', '900')
+
 #### 字间距
+
 - letterSpacing number
+
 #### 行间距
+
 - lineHeight number
 
-#### 字体对齐方式（指定文本的对齐方式。其中’justify’值仅iOS支持。）
+#### 字体对齐方式（指定文本的对齐方式。其中’justify’值仅 iOS 支持。）
+
 - textAlign enum("auto", 'left', 'right', 'center', 'justify')
 
 Flexbox Style
+
 #### 宽高
 
 - width number
@@ -127,12 +155,17 @@ Flexbox Style
 - borderRightWidth number
 - borderTopWidth number
 - borderWidth number
+
 #### 弹性伸缩
+
 - flex number
+
 #### 弹性伸缩方向
+
 - flexDirection enum('row', 'column')
 
 #### 弹性伸缩包裹
+
 - flexWrap enum('row', 'row-reverse', 'column', 'column-reverse)
 
 ##### 属性内容
@@ -150,6 +183,7 @@ Flexbox Style
 - marginVertical number
 
 #### 内边距
+
 - padding number
 - paddingBottom number
 - paddingLeft number
@@ -168,54 +202,55 @@ Flexbox Style
 - top number
 - left number
 - bottom number
-#### Transform属性变化
+
+#### Transform 属性变化
 
 - transform [
-    - {perspective: number}, 
-    - {rotate: string}, 
-    - {rotateX: string}, 
-    - {rotateY: string}, 
-    - {rotateZ: string}, 
-    - {scale: number}, 
-    - {scaleX: number}, 
-    - {scaleY: number}, 
-    - {translateX: number}, 
-    - {translateY: number}, 
-    - {skewX: string},
-    - {skewY: string}
-] 
+  - {perspective: number},
+  - {rotate: string},
+  - {rotateX: string},
+  - {rotateY: string},
+  - {rotateZ: string},
+  - {scale: number},
+  - {scaleX: number},
+  - {scaleY: number},
+  - {translateX: number},
+  - {translateY: number},
+  - {skewX: string},
+  - {skewY: string}
+  ]
 
 #### 属性矩阵
 
-- transformMatrix TransformMatrixPropType 
+- transformMatrix TransformMatrixPropType
 
 ### 3.adb server version (39) doesn't match this client (40)
 
-##### Genymotion==>设置==>ADB=>Use custom Android SDK Tools=>选择安卓adk目录，然后cmd输入
+##### Genymotion==>设置==>ADB=>Use custom Android SDK Tools=>选择安卓 adk 目录，然后 cmd 输入
 
 - adb kill-server
 
 - adb start-server
 
-### 4.Genymotion不能安装APK的解决方法
+### 4.Genymotion 不能安装 APK 的解决方法
 
-- 1、下载Genymotion-ARM-Translation-Librarities工具转换包；下载路径:https://pan.baidu.com/s/1sWe36TSZHPxqiaLn1TGPig
+- 1、下载 Genymotion-ARM-Translation-Librarities 工具转换包；下载路径:https://pan.baidu.com/s/1sWe36TSZHPxqiaLn1TGPig
 
-- 2、将下载号的工具包直接拖拽到Genymotion中，
+- 2、将下载号的工具包直接拖拽到 Genymotion 中，
 
 - 3、进行操作
 
-    - 1.adb shell
+  - 1.adb shell
 
-    - 2.cd /sdcard/Download/
+  - 2.cd /sdcard/Download/
 
-    - 3.sh /system/bin/flash-archive.sh /sdcard/Download/Genymotion-ARM-Translation.zip
+  - 3.sh /system/bin/flash-archive.sh /sdcard/Download/Genymotion-ARM-Translation.zip
 
-    - 4.重启模拟器。
+  - 4.重启模拟器。
 
-### 5.运行react-native init Hello之后报错 "import type {CommandT} from './commands';"
+### 5.运行 react-native init Hello 之后报错 "import type {CommandT} from './commands';"
 
-- 更新的react-native 0.56版本在Windows上有bug不能正常运行，所以才会一直报错，然后我试了一下react-native init xxx --version 0.55.4，即初始化时指定版本
+- 更新的 react-native 0.56 版本在 Windows 上有 bug 不能正常运行，所以才会一直报错，然后我试了一下 react-native init xxx --version 0.55.4，即初始化时指定版本
 
 - 可以进入项目的文件夹，然后
 
@@ -224,11 +259,12 @@ Flexbox Style
   - react-native: 0.56.0
   - 就可以看到自己项目的版本了
 
-### 6.正确地引入antd-mobile的步骤：
+### 6.正确地引入 antd-mobile 的步骤：
+
 - (1)npm intall react-dom --save
 - (2)npm install antd-mobile --save
 - (3)npm install babel-plugin-import --save-dev
-- (4).babelrc中为
+- (4).babelrc 中为
 
 ```json
 {
@@ -240,4 +276,4 @@ Flexbox Style
 }
 ```
 
-- (5)在代码中引入antd-mobile，然后正确的运行
+- (5)在代码中引入 antd-mobile，然后正确的运行
