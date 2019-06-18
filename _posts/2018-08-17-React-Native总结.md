@@ -226,7 +226,7 @@ Flexbox Style
 
 ### 3.adb server version (39) doesn't match this client (40)
 
-##### Genymotion==>设置==>ADB=>Use custom Android SDK Tools=>选择安卓 adk 目录，然后 cmd 输入
+#### Genymotion==>设置==>ADB=>Use custom Android SDK Tools=>选择安卓 adk 目录，然后 cmd 输入
 
 - adb kill-server
 
@@ -277,3 +277,8 @@ Flexbox Style
 ```
 
 - (5)在代码中引入 antd-mobile，然后正确的运行
+### 7.指定端口启动项目
+```js
+react-native run-android --port 5000
+react-native run-android=8082
+```
